@@ -1,0 +1,18 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 01_Physics_Equations.ipynb
+      - 02_Electromagnetic_Equations.ipynb
+      - 03_Electricity_Equations.ipynb
+      - 04_FFT_Examples.ipynb
+      - 05_Electricity_Load_Forecasting.ipynb
+      - 06_Electricity_Peak_Forecasting.ipynb
+      - 07_IotaWatt_Battery_ROI.ipynb
+      - 07_battery_roi_flow.svg
+      - Logo.svg
+      - Native_Load_2022.csv
+      - favi.svg
+      - nbdev.yml
+      - sidebar.yml
+      - styles.css

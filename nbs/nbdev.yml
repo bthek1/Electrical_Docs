@@ -1,0 +1,14 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "Electrical_Docs"
+  site-url: "https://bthek1.github.io/Electrical_Docs"
+  description: "Electrical theory, signal processing, load forecasting and energy cost"
+  repo-branch: main
+  repo-url: "https://github.com/bthek1/Electrical_Docs"
+
+format-links:
+  - html
+  - format: commonmark
+    text: Markdown
