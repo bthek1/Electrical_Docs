@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" width="900" height="330" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="900" height="330" fill="#ffffff"/>
+  <text x="210" y="30" text-anchor="middle" font-size="14" fill="#0f172a" font-weight="bold">Star (wye)</text>
+  <polyline points="210,175 210.0,142.5" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="210.0,102.5 210,70" fill="none" stroke="#475569" stroke-width="2"/>
+  <rect x="190.0" y="113.5" width="40" height="18" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" transform="rotate(-90.00 210.0 122.5)"/>
+  <text x="234.0" y="126.5" text-anchor="middle" font-size="13" fill="#0f172a">Z</text>
+  <circle cx="210" cy="70" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="210,175 177.40482627050199,204.16410281060348" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="147.59517372949801,230.83589718939652 115,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <rect x="142.5" y="208.5" width="40" height="18" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" transform="rotate(138.18 162.5 217.5)"/>
+  <text x="146.49692337272418" y="203.61420847539762" text-anchor="middle" font-size="13" fill="#0f172a">Z</text>
+  <circle cx="115" cy="260" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="210,175 242.59517372949801,204.16410281060348" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="272.404826270502,230.83589718939652 305,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <rect x="237.5" y="208.5" width="40" height="18" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" transform="rotate(41.82 257.5 217.5)"/>
+  <text x="273.50307662727585" y="203.61420847539762" text-anchor="middle" font-size="13" fill="#0f172a">Z</text>
+  <circle cx="305" cy="260" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="210" y="58" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">L1</text>
+  <text x="100" y="282" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">L2</text>
+  <text x="320" y="282" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">L3</text>
+  <circle cx="210" cy="175" r="3.5" fill="#475569"/>
+  <text x="226" y="180" text-anchor="start" font-size="13" fill="#1d4ed8" font-weight="bold">N</text>
+  <line x1="210" y1="175" x2="210" y2="296" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="210" cy="300" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="210" y="318" text-anchor="middle" font-size="12" fill="#1d4ed8">neutral</text>
+  <text x="20" y="120" text-anchor="start" font-size="12" fill="#475569">Vph = 230 V</text>
+  <text x="20" y="138" text-anchor="start" font-size="12" fill="#475569">VL = 400 V</text>
+  <text x="20" y="156" text-anchor="start" font-size="12" fill="#475569">IL = Iph</text>
+  <line x1="450" y1="20" x2="450" y2="315" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <text x="670" y="30" text-anchor="middle" font-size="14" fill="#0f172a" font-weight="bold">Delta</text>
+  <polyline points="670,70 627.1737222338024,147.4951692912146" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="607.8262777661976,182.5048307087854 565,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <rect x="597.5" y="156.0" width="40" height="18" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" transform="rotate(118.93 617.5 165.0)"/>
+  <text x="596.4942031494576" y="157.39153331943706" text-anchor="middle" font-size="13" fill="#0f172a">Z</text>
+  <polyline points="565,260 650.0,260.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="690.0,260.0 775,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <rect x="650.0" y="251.0" width="40" height="18" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" transform="rotate(0.00 670.0 260.0)"/>
+  <text x="670.0" y="240.0" text-anchor="middle" font-size="13" fill="#0f172a">Z</text>
+  <polyline points="670,70 712.8262777661976,147.4951692912146" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="732.1737222338024,182.5048307087854 775,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <rect x="702.5" y="156.0" width="40" height="18" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" transform="rotate(61.07 722.5 165.0)"/>
+  <text x="743.5057968505424" y="157.39153331943706" text-anchor="middle" font-size="13" fill="#0f172a">Z</text>
+  <circle cx="670" cy="70" r="3.5" fill="#475569"/>
+  <circle cx="565" cy="260" r="3.5" fill="#475569"/>
+  <circle cx="775" cy="260" r="3.5" fill="#475569"/>
+  <polyline points="670,70 670,50" fill="none" stroke="#475569" stroke-width="2"/>
+  <circle cx="670" cy="50" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="684" y="48" text-anchor="start" font-size="13" fill="#0f172a" font-weight="bold">L1</text>
+  <polyline points="565,260 535,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <circle cx="535" cy="260" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="535" y="284" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">L2</text>
+  <polyline points="775,260 805,260" fill="none" stroke="#475569" stroke-width="2"/>
+  <circle cx="805" cy="260" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="805" y="284" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">L3</text>
+  <text x="880" y="120" text-anchor="end" font-size="12" fill="#475569">Vph = VL = 400 V</text>
+  <text x="880" y="138" text-anchor="end" font-size="12" fill="#475569">IL = &#8730;3 &#215; Iph</text>
+  <text x="880" y="156" text-anchor="end" font-size="12" fill="#475569">no neutral</text>
+</svg>
