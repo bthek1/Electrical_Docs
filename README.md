@@ -5,7 +5,7 @@
 
 This site covers electricity on paper and in data, not on the bench. It starts with the equations and circuit theory, works through three-phase power systems, single line diagrams and control, then moves to filters and signal processing, forecasts grid load from real demand data, and ends by asking whether a home battery pays for itself. The newer pages are runnable: each works an example in code and checks it with assertions.
 
-For the hardware side (tools, motors, microcontrollers, switchboards) see [Hardware Tools](https://bthek1.github.io/Hardware_Tools/). For the general forecasting toolkit these pages build on see [Time Series ML](https://bthek1.github.io/TimeSeriesML/).
+For the hardware side (tools, motors, microcontrollers, switchboards) see [Hardware Tools](https://bthek1.github.io/Hardware_Tools/). For the general forecasting toolkit these pages build on see [Time Series ML](https://bthek1.github.io/ML_Timeseries/).
 
 ------------------------------------------------------------------------
 
