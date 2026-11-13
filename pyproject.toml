@@ -28,3 +28,4 @@ version = {attr = "Electrical_Docs.__version__"}
 include = ["Electrical_Docs"]
 
 [tool.nbdev]
+custom_sidebar = true
