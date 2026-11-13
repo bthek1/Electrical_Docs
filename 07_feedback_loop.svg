@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 230" width="860" height="230" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="860" height="230" fill="#ffffff"/>
+  <text x="40" y="76" text-anchor="middle" font-size="13" fill="#0f172a" font-style="italic">r</text>
+  <text x="40" y="118" text-anchor="middle" font-size="11" fill="#475569">set point</text>
+  <polyline points="20,90 156,90" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <circle cx="170" cy="90" r="14" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="160.2,80.2 179.8,99.8" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="160.2,99.8 179.8,80.2" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="150" y="72" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">+</text>
+  <text x="184" y="124" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">&#8722;</text>
+  <polyline points="184,90 270,90" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="226" y="80" text-anchor="middle" font-size="13" fill="#0f172a" font-style="italic">e</text>
+  <text x="226" y="112" text-anchor="middle" font-size="11" fill="#475569">error</text>
+  <rect x="270" y="58" width="170" height="64" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="355.0" y="87.0" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">Controller C(s)</text>
+  <text x="355.0" y="104.0" text-anchor="middle" font-size="12" fill="#475569">PID</text>
+  <polyline points="440,90 530,90" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="485" y="80" text-anchor="middle" font-size="13" fill="#0f172a" font-style="italic">u</text>
+  <text x="485" y="112" text-anchor="middle" font-size="11" fill="#475569">voltage</text>
+  <rect x="530" y="58" width="170" height="64" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="615.0" y="87.0" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">Plant G(s)</text>
+  <text x="615.0" y="104.0" text-anchor="middle" font-size="12" fill="#475569">DC motor</text>
+  <polyline points="700,90 780,90" fill="none" stroke="#475569" stroke-width="2"/>
+  <circle cx="780" cy="90" r="3.5" fill="#475569"/>
+  <polyline points="780,90 840,90" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="800" y="80" text-anchor="middle" font-size="13" fill="#0f172a" font-style="italic">y</text>
+  <text x="812" y="112" text-anchor="middle" font-size="11" fill="#475569">speed</text>
+  <polyline points="780,90 780,190" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="780,190 170,190" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="170,190 170,104" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="475" y="210" text-anchor="middle" font-size="11" fill="#475569">feedback: measured speed</text>
+</svg>

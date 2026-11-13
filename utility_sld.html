@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benedict Thekkel">
+<meta name="description" content="How to read a utility single line diagram (SLD): what one line stands for, the symbols, the ratings and protection labels, bus arrangements and switching state, and a fault level calculation that walks down the diagram.">
+
+<title>Utility Single Line Diagrams – Electrical_Docs</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./control_systems.html" rel="next">
+<link href="./three_phase_power_systems.html" rel="prev">
+<link href="./favi.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8e10d5f78f84c68f34904ffd70ceca7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e0bec6286bfda571ec17f309cbd30a0a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8e10d5f78f84c68f34904ffd70ceca7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Utility Single Line Diagrams – Electrical_Docs">
+<meta property="og:description" content="How to read a utility single line diagram (SLD): what one line stands for, the symbols, the ratings and protection labels, bus arrangements and switching state, and a fault level calculation that walks down the diagram.">
+<meta property="og:image" content="https://bthek1.github.io/Electrical_Docs/06_sld_symbols.svg">
+<meta property="og:site_name" content="Electrical_Docs">
+<meta name="twitter:title" content="Utility Single Line Diagrams – Electrical_Docs">
+<meta name="twitter:description" content="How to read a utility single line diagram (SLD): what one line stands for, the symbols, the ratings and protection labels, bus arrangements and switching state, and a fault level calculation that walks down the diagram.">
+<meta name="twitter:image" content="https://bthek1.github.io/Electrical_Docs/06_sld_symbols.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./Logo.svg" alt="Benedict Thekkel" class="navbar-logo light-content">
+    <img src="./Logo.svg" alt="Benedict Thekkel" class="navbar-logo dark-content">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-docs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Docs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-docs">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/bthek1_blog/">
+ <span class="dropdown-text">Blog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Ideas/">
+ <span class="dropdown-text">Ideas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Other/">
+ <span class="dropdown-text">Other</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-business" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Business</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-business">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Business_docs/">
+ <span class="dropdown-text">Business Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Finances/">
+ <span class="dropdown-text">Finances</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-web">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Web_development/">
+ <span class="dropdown-text">Web Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Front_End/">
+ <span class="dropdown-text">Front End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Back_End/">
+ <span class="dropdown-text">Back End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/IaaS_docs/">
+ <span class="dropdown-text">IaaS Docs</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-machine-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Machine Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_methods/">
+ <span class="dropdown-text">ML Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_Timeseries/">
+ <span class="dropdown-text">ML Timeseries</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-deep-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-deep-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/FastAI_course/">
+ <span class="dropdown-text">FastAI course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_methods/">
+ <span class="dropdown-text">DL Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_tasks/">
+ <span class="dropdown-text">DL Tasks</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Software_Tools/">
+ <span class="dropdown-text">Software Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Hardware_Tools/">
+ <span class="dropdown-text">Hardware Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Electrical_Docs/">
+ <span class="dropdown-text">Electrical Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Python_Libs/">
+ <span class="dropdown-text">Python Libs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/nbdevAuto/">
+ <span class="dropdown-text">Nbdev Automation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ROS2_docs/">
+ <span class="dropdown-text">ROS2 Docs</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Github"><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs">
+              <i class="bi bi-code-slash pe-1"></i>
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs/issues/new">
+              <i class="bi bi-bug pe-1"></i>
+            Report a Bug
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs/issues/new">
+              <i class="bi bi-chat-right-text pe-1"></i>
+            Ask a Question
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs/issues">
+              <i class="bi bi-list-ul pe-1"></i>
+            All Issues
+            </a>
+          </li>
+      </ul>
+    </div>
+    <a href="https://www.linkedin.com/in/benedict-thekkel/" title="" class="quarto-navigation-tool px-1" aria-label="Linkedin"><i class="bi bi-linkedin"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./utility_sld.html">Utility Single Line Diagrams</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Docs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./physics_equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Physics Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electromagnetic_equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electromagnetic Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electricity_equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electricity Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./network_theorems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Theorems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./three_phase_power_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-Phase Power Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./utility_sld.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Utility Single Line Diagrams</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./control_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Control Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Design</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fft_examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Darts - Fast Fourier Transform Forecasting Model (FFT)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electricity_load_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nixtla - Electricity Load Forecast</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electricity_peak_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nixtla - Detect Demand Peaks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./iotawatt_battery_roi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sense -&gt; Analyze -&gt; Decide: From IotaWatt to a Home-Battery ROI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electrical_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electrical_switch_components.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Switch Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Electrical Motors</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/electric_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electric Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/servos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Servo Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/stepper_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stepper Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/brushless_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Brushless Motors (BLDC / PMSM)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-one-line-is-enough" id="toc-why-one-line-is-enough" class="nav-link active" data-scroll-target="#why-one-line-is-enough">Why one line is enough</a></li>
+  <li><a href="#symbols" id="toc-symbols" class="nav-link" data-scroll-target="#symbols">Symbols</a></li>
+  <li><a href="#reading-a-utility-sld" id="toc-reading-a-utility-sld" class="nav-link" data-scroll-target="#reading-a-utility-sld">Reading a utility SLD</a></li>
+  <li><a href="#what-the-labels-tell-you" id="toc-what-the-labels-tell-you" class="nav-link" data-scroll-target="#what-the-labels-tell-you">What the labels tell you</a></li>
+  <li><a href="#protection-device-numbers" id="toc-protection-device-numbers" class="nav-link" data-scroll-target="#protection-device-numbers">Protection device numbers</a></li>
+  <li><a href="#bus-arrangements" id="toc-bus-arrangements" class="nav-link" data-scroll-target="#bus-arrangements">Bus arrangements</a></li>
+  <li><a href="#switching-state-and-normally-open-points" id="toc-switching-state-and-normally-open-points" class="nav-link" data-scroll-target="#switching-state-and-normally-open-points">Switching state and normally open points</a></li>
+  <li><a href="#worked-example-fault-level-down-the-sld" id="toc-worked-example-fault-level-down-the-sld" class="nav-link" data-scroll-target="#worked-example-fault-level-down-the-sld">Worked example: fault level down the SLD</a></li>
+  <li><a href="#sld-versus-other-drawings" id="toc-sld-versus-other-drawings" class="nav-link" data-scroll-target="#sld-versus-other-drawings">SLD versus other drawings</a></li>
+  <li><a href="#australian-practice" id="toc-australian-practice" class="nav-link" data-scroll-target="#australian-practice">Australian practice</a></li>
+  <li><a href="#checklist-for-reading-any-sld" id="toc-checklist-for-reading-any-sld" class="nav-link" data-scroll-target="#checklist-for-reading-any-sld">Checklist for reading any SLD</a></li>
+  <li><a href="#not-covered-here" id="toc-not-covered-here" class="nav-link" data-scroll-target="#not-covered-here">Not covered here</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/bthek1/Electrical_Docs/blob/main/06_Utility_SLD.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Electrical_Docs/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Utility Single Line Diagrams</h1>
+</div>
+
+<div>
+  <div class="description">
+    How to read a utility single line diagram (SLD): what one line stands for, the symbols, the ratings and protection labels, bus arrangements and switching state, and a fault level calculation that walks down the diagram.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benedict Thekkel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>A single line diagram is the map of an electrical network. It shows what connects to what, at which voltage, through which switches, transformers and protection. Utilities use it to plan, to operate and to keep people safe. A switching operator, a protection engineer and a connection designer all start from the same drawing.</p>
+<p>This page builds a typical Australian utility chain, from a 110 kV line down to a 400/230 V customer bus. It explains each part of the drawing. Then it computes the fault level at each bus from the ratings printed on the diagram, and assertions check that the numbers on the drawing match the code.</p>
+<hr>
+<section id="why-one-line-is-enough" class="level2">
+<h2 class="anchored" data-anchor-id="why-one-line-is-enough">Why one line is enough</h2>
+<p>A power network carries three phases, so a full wiring diagram needs three conductors for every connection. An SLD draws one. That works because a utility network is designed to be <strong>balanced</strong>. The three phases carry equal currents, 120 degrees apart, so one phase tells you everything about the other two. <a href="./three_phase_power_systems.html">Three-Phase Power Systems</a> covers this per-phase idea in depth.</p>
+<p>So one line on an SLD stands for all three phases of a circuit (and the neutral, where there is one). A breaker drawn once is a three-pole breaker. A transformer drawn as two circles is a three-phase transformer.</p>
+<p>The single line view stops being enough in three cases:</p>
+<ol type="1">
+<li><strong>Unbalanced faults.</strong> A single phase to earth fault breaks the symmetry. Protection studies then use symmetrical components, and the SLD only supplies the data.</li>
+<li><strong>Secondary wiring.</strong> CT and VT connections, relay inputs and trip circuits need a <strong>three line diagram</strong> or a schematic, which shows each phase.</li>
+<li><strong>Single phase parts of the network.</strong> Rural single wire earth return (SWER) lines and single phase LV services are drawn on the same SLD, but the line no longer means three phases. The drawing labels them.</li>
+</ol>
+<hr>
+</section>
+<section id="symbols" class="level2">
+<h2 class="anchored" data-anchor-id="symbols">Symbols</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="06_sld_symbols.svg" class="img-fluid figure-img"></p>
+<figcaption>Common SLD symbols in IEC 60617 style: busbar, circuit breaker, disconnector, fuse, power transformer, current transformer, voltage transformer, earth, earth switch, surge arrester, generator and outgoing feeder.</figcaption>
+</figure>
+</div>
+<p>The four switching devices are easy to confuse. They differ in what current they can break:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Device</th>
+<th>Breaks load current?</th>
+<th>Breaks fault current?</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Circuit breaker</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Opened by protection relays. The only device that clears faults on HV feeders and transformers</td>
+</tr>
+<tr class="even">
+<td>Load break switch</td>
+<td>Yes</td>
+<td>No</td>
+<td>Switching ring main units and feeder sections under load</td>
+</tr>
+<tr class="odd">
+<td>Disconnector (isolator)</td>
+<td>No</td>
+<td>No</td>
+<td>Gives a visible open point for safe work. Operated only after a breaker has opened</td>
+</tr>
+<tr class="even">
+<td>Fuse</td>
+<td>No (on its own)</td>
+<td>Yes, once</td>
+<td>Cheap fault protection for distribution transformers and LV circuits</td>
+</tr>
+</tbody>
+</table>
+<p>Breaker state matters as much as the symbol. Many utilities draw a closed breaker filled and an open one hollow, and mark a deliberately open device <strong>N/O</strong> (normally open). On a live operating diagram the state is updated as switching happens.</p>
+<p>North American drawings follow ANSI/IEEE conventions instead of IEC. The topology reads the same way. The breaker symbol differs, and protection is shown as numbered device circles. The numbers are listed below.</p>
+<hr>
+</section>
+<section id="reading-a-utility-sld" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-utility-sld">Reading a utility SLD</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="06_utility_sld.svg" class="img-fluid figure-img"></p>
+<figcaption>Example utility SLD. Two 110 kV lines feed a zone substation through disconnectors and breakers with distance protection into two 110/11 kV 25 MVA transformers with 10 percent impedance. Each transformer feeds an 11 kV bus; a normally open bus section breaker joins bus A and bus B. Four 11 kV feeders leave through breakers with 50/51 overcurrent protection. Feeder F2 runs several km to a distribution substation: an HV fuse, an 11 kV / 433 V 500 kVA 4 percent Dyn11 transformer, an LV main breaker and a 400/230 V bus with three fused LV circuits. A normally open point between F2 and F3 allows backfeed. Fault levels are 11.7 kA at 11 kV with the bus section open, 21.0 kA with it closed, and 15.8 kA at the LV bus.</figcaption>
+</figure>
+</div>
+<p>Read an SLD in the direction power flows, from source to load. On this drawing that is top to bottom:</p>
+<ol type="1">
+<li><strong>Sources.</strong> Two 110 kV lines come in from the transmission or sub-transmission network. Each passes a disconnector, a breaker and a CT. The breaker carries distance protection (21), which measures impedance to decide whether a fault is on its own line.</li>
+<li><strong>Transformation.</strong> Each line feeds its own 110/11 kV zone transformer. The label gives the ratio, the rating (25 MVA) and the impedance (10%). Differential protection (87T) compares current in and out and trips both sides for an internal fault.</li>
+<li><strong>Busbars.</strong> Each transformer feeds one section of the 11 kV bus. The bus section breaker between them is <strong>normally open</strong>, so each transformer carries its own half of the load. The next section shows why the open tie matters.</li>
+<li><strong>Feeders.</strong> Four 11 kV feeders leave the bus, each through a breaker with overcurrent and earth fault protection (50/51). A feeder runs for kilometres as overhead line or cable.</li>
+<li><strong>Distribution substation.</strong> Along feeder F2, a fuse protects a 500 kVA, 11 kV / 433 V transformer. Its secondary is set about 8% above 400 V, so that voltage at the end of the LV circuits stays within limits under load. An LV main breaker feeds the 400/230 V bus. Fused LV circuits leave the bus for customers.</li>
+<li><strong>Alternate supply.</strong> A normally open point joins the end of F2 to F3. If F2’s breaker trips for a fault near the zone substation, operators isolate the faulted section and close this point. F3 then supplies the rest of F2 from the other side.</li>
+</ol>
+<p>The colours follow voltage level, a common habit on utility drawings, so a glance shows where each transformer changes voltage.</p>
+<hr>
+</section>
+<section id="what-the-labels-tell-you" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-labels-tell-you">What the labels tell you</h2>
+<p>Every number next to a symbol is there because someone downstream needs it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Example</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Voltage ratio</td>
+<td>110/11 kV</td>
+<td>Sets the voltage on each side, and the base for per-unit calculations</td>
+</tr>
+<tr class="even">
+<td>Rating</td>
+<td>25 MVA, 500 kVA</td>
+<td>Continuous load limit, and the base the impedance is quoted on</td>
+</tr>
+<tr class="odd">
+<td>Impedance</td>
+<td>Z = 10%</td>
+<td>Limits fault current and sets voltage drop under load. The main input to fault studies</td>
+</tr>
+<tr class="even">
+<td>Vector group</td>
+<td>Dyn11</td>
+<td>Winding connections and phase shift. D = delta HV, y = star LV, n = neutral brought out, 11 = LV leads HV by 30 degrees (11 o’clock). Two transformers can run in parallel only if their groups match</td>
+</tr>
+<tr class="odd">
+<td>Tap range</td>
+<td>+/-10% on HV, 17 steps</td>
+<td>How far an on-load tap changer can regulate voltage</td>
+</tr>
+<tr class="even">
+<td>CT ratio</td>
+<td>600/1 A</td>
+<td>Scales primary current into the relay. Sets protection and metering accuracy</td>
+</tr>
+<tr class="odd">
+<td>Breaker rating</td>
+<td>1250 A, 25 kA</td>
+<td>Continuous current, and the largest fault it can break safely. Must exceed the bus fault level</td>
+</tr>
+<tr class="even">
+<td>Cable or conductor</td>
+<td>3c 240 mm2 Al XLPE</td>
+<td>Rating and impedance of the feeder</td>
+</tr>
+<tr class="odd">
+<td>Fault level</td>
+<td>11.7 kA</td>
+<td>Short circuit current at a bus. Sizes switchgear, sets protection and gives the arc flash inputs</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="protection-device-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="protection-device-numbers">Protection device numbers</h2>
+<p>Protection on an SLD is usually a device number from IEEE C37.2. Australian drawings use the same numbers, even with IEC symbols.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Number</th>
+<th>Function</th>
+<th>Where you see it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>21</td>
+<td>Distance</td>
+<td>Transmission and sub-transmission lines</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>Synchronism check</td>
+<td>Breakers that can close two live systems together</td>
+</tr>
+<tr class="odd">
+<td>27 / 59</td>
+<td>Under / overvoltage</td>
+<td>Buses, generator and inverter connections</td>
+</tr>
+<tr class="even">
+<td>50 / 51</td>
+<td>Instantaneous / time overcurrent</td>
+<td>Feeders, transformer backup</td>
+</tr>
+<tr class="odd">
+<td>50N / 51N</td>
+<td>Earth fault versions of 50 / 51</td>
+<td>Feeders</td>
+</tr>
+<tr class="even">
+<td>67</td>
+<td>Directional overcurrent</td>
+<td>Parallel feeders, rings, sites with generation</td>
+</tr>
+<tr class="odd">
+<td>79</td>
+<td>Auto-reclose</td>
+<td>Overhead feeders, where most faults are transient</td>
+</tr>
+<tr class="even">
+<td>81</td>
+<td>Under / over frequency</td>
+<td>Load shedding, generator and inverter connections</td>
+</tr>
+<tr class="odd">
+<td>86</td>
+<td>Lockout relay</td>
+<td>Holds a breaker open after a serious trip until someone resets it</td>
+</tr>
+<tr class="even">
+<td>87T / 87B / 87L</td>
+<td>Differential: transformer / bus / line</td>
+<td>Equipment where fast, selective clearing matters</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="bus-arrangements" class="level2">
+<h2 class="anchored" data-anchor-id="bus-arrangements">Bus arrangements</h2>
+<p>The bus layout decides what one fault or one maintenance outage takes out. It is the first thing to read on a substation SLD.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arrangement</th>
+<th>How it works</th>
+<th>Strength</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single bus</td>
+<td>Every circuit on one bus</td>
+<td>Cheap, simple</td>
+<td>A bus fault or bus outage drops everything</td>
+</tr>
+<tr class="even">
+<td>Sectionalised bus</td>
+<td>Bus split by a section breaker, as in the example</td>
+<td>A bus fault loses half. Normally open tie limits fault level</td>
+<td>Load must be shared across sections by switching</td>
+</tr>
+<tr class="odd">
+<td>Double bus</td>
+<td>Each circuit can connect to either of two buses</td>
+<td>Maintain one bus while live on the other</td>
+<td>More disconnectors and more complex switching</td>
+</tr>
+<tr class="even">
+<td>Ring bus</td>
+<td>Breakers form a closed ring, circuits between them</td>
+<td>Any breaker can be maintained without an outage</td>
+<td>Hard to extend. Protection is more complex</td>
+</tr>
+<tr class="odd">
+<td>Breaker-and-a-half</td>
+<td>Three breakers serve two circuits between two buses</td>
+<td>Very high reliability. Common at transmission level</td>
+<td>Most expensive</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="switching-state-and-normally-open-points" class="level2">
+<h2 class="anchored" data-anchor-id="switching-state-and-normally-open-points">Switching state and normally open points</h2>
+<p>An SLD shows two different things. The <strong>design</strong> is what is built. The <strong>state</strong> is which devices are open or closed right now. Utility control rooms keep an operating diagram with live state, and every switching program is written against it.</p>
+<p>Normally open points are the key to reading a distribution network. Most urban 11 kV networks are built as meshes or rings, but they are <strong>run radially</strong>: one source per section, with an open point somewhere in each loop. A radial run keeps protection simple, because fault current flows only one way. It also keeps fault levels down. When a section fails, operators move the open point to restore supply from another feeder.</p>
+<p>For safe work, the SLD is where isolation is planned. The usual sequence is:</p>
+<ol type="1">
+<li>Open the breaker to interrupt current.</li>
+<li>Open the disconnectors on both sides to make a visible break.</li>
+<li>Lock and tag the open devices.</li>
+<li>Test that the section is dead.</li>
+<li>Close earth switches, or apply portable earths, on both sides.</li>
+</ol>
+<p>A missing backfeed path on the drawing is how people get hurt. Embedded generation such as rooftop solar and batteries adds paths that older drawings never showed.</p>
+<hr>
+</section>
+<section id="worked-example-fault-level-down-the-sld" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example-fault-level-down-the-sld">Worked example: fault level down the SLD</h2>
+<p>The ratings on the diagram are enough to compute the three-phase fault current at every bus. The method is <strong>per-unit</strong>. Each impedance is expressed as a fraction of a common base power, <span class="math inline">\(S_{base}\)</span>, so impedances on both sides of a transformer can be added directly without referring them through the turns ratio.</p>
+<p>Three steps do the work. Convert each element to per-unit on the common base:</p>
+<p><span class="math display">\[ Z_{pu} = \frac{Z\%}{100} \cdot \frac{S_{base}}{S_{rated}} \]</span></p>
+<p>Add the per-unit impedances in series from the source to the faulted bus. Then convert the total back to fault power and current:</p>
+<p><span class="math display">\[ S_{fault} = \frac{S_{base}}{Z_{total}} \qquad I_{fault} = \frac{S_{fault}}{\sqrt{3}\, V_{LL}} \]</span></p>
+<p>The upstream grid is given by its fault level at 110 kV, here 2000 MVA, which converts to an impedance the same way. Resistance, feeder impedance and motor contribution are ignored. That gives slightly high, so conservative, currents, which is the safe direction for sizing switchgear.</p>
+<hr>
+<div id="8fa48f14" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>S_BASE_MVA <span class="op">=</span> <span class="fl">100.0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> source_z(fault_mva, s_base<span class="op">=</span>S_BASE_MVA):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Per-unit impedance of the upstream grid, from its fault level."</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s_base <span class="op">/</span> fault_mva</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> transformer_z(z_pct, rating_mva, s_base<span class="op">=</span>S_BASE_MVA):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Transformer impedance moved from its own rating onto the common base."</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> z_pct <span class="op">/</span> <span class="dv">100</span> <span class="op">*</span> s_base <span class="op">/</span> rating_mva</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fault_level(z_pu, kv, s_base<span class="op">=</span>S_BASE_MVA):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Three-phase fault MVA and kA at a bus whose total source impedance is z_pu."</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    mva <span class="op">=</span> s_base <span class="op">/</span> z_pu</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mva, mva <span class="op">/</span> (math.sqrt(<span class="dv">3</span>) <span class="op">*</span> kv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="31763a5c" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>z_grid <span class="op">=</span> source_z(<span class="dv">2000</span>)       <span class="co"># 110 kV grid fault level</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>z_zone <span class="op">=</span> transformer_z(<span class="dv">10</span>, <span class="dv">25</span>)  <span class="co"># each 110/11 kV zone transformer</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>z_dist <span class="op">=</span> transformer_z(<span class="dv">4</span>, <span class="fl">0.5</span>)  <span class="co"># 11 kV / 433 V distribution transformer</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>buses <span class="op">=</span> {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"110 kV bus"</span>: (z_grid, <span class="dv">110</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"11 kV bus, section N/O"</span>: (z_grid <span class="op">+</span> z_zone, <span class="dv">11</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"11 kV bus, section closed"</span>: (z_grid <span class="op">+</span> z_zone <span class="op">/</span> <span class="dv">2</span>, <span class="dv">11</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"400 V bus"</span>: (z_grid <span class="op">+</span> z_zone <span class="op">+</span> z_dist, <span class="fl">0.433</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"400 V bus, infinite grid"</span>: (z_dist, <span class="fl">0.433</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {name: (z, <span class="op">*</span>fault_level(z, kv)) <span class="cf">for</span> name, (z, kv) <span class="kw">in</span> buses.items()}</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [<span class="st">"| Bus | Z total (pu) | Fault MVA | Fault kA |"</span>, <span class="st">"|---|---:|---:|---:|"</span>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>rows <span class="op">+=</span> [<span class="ss">f"| </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>z<span class="sc">:.3f}</span><span class="ss"> | </span><span class="sc">{</span>mva<span class="sc">:.1f}</span><span class="ss"> | </span><span class="sc">{</span>ka<span class="sc">:.2f}</span><span class="ss"> |"</span> <span class="cf">for</span> n, (z, mva, ka) <span class="kw">in</span> results.items()]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Markdown(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(rows))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th>Bus</th>
+<th style="text-align: right;">Z total (pu)</th>
+<th style="text-align: right;">Fault MVA</th>
+<th style="text-align: right;">Fault kA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>110 kV bus</td>
+<td style="text-align: right;">0.050</td>
+<td style="text-align: right;">2000.0</td>
+<td style="text-align: right;">10.50</td>
+</tr>
+<tr class="even">
+<td>11 kV bus, section N/O</td>
+<td style="text-align: right;">0.450</td>
+<td style="text-align: right;">222.2</td>
+<td style="text-align: right;">11.66</td>
+</tr>
+<tr class="odd">
+<td>11 kV bus, section closed</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: right;">400.0</td>
+<td style="text-align: right;">20.99</td>
+</tr>
+<tr class="even">
+<td>400 V bus</td>
+<td style="text-align: right;">8.450</td>
+<td style="text-align: right;">11.8</td>
+<td style="text-align: right;">15.78</td>
+</tr>
+<tr class="odd">
+<td>400 V bus, infinite grid</td>
+<td style="text-align: right;">8.000</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: right;">16.67</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Three things come out of the table.</p>
+<ol type="1">
+<li><strong>Closing the bus section nearly doubles the 11 kV fault level</strong>, from 11.7 kA to 21.0 kA, because the two transformers then feed a fault in parallel. That is why the tie runs normally open. Closing it would also push all switchgear on both buses closer to its 25 kA breaking rating. The tie is closed only briefly, during load transfers, after checking the result against the rating.</li>
+<li><strong>The LV fault level depends almost entirely on the distribution transformer.</strong> Its 8 pu dwarfs the 0.45 pu upstream. Even an infinitely strong grid would only raise the 400 V fault current from 15.8 kA to 16.7 kA. So LV switchboard ratings can be set from the transformer nameplate alone, which is why connection rules quote prospective fault current by transformer size.</li>
+<li><strong>The same walk works on any SLD.</strong> An SLD is a graph whose edges carry impedances. A fault study adds the impedances along the path from each source to the faulted bus, and combines parallel paths. Commercial tools such as PowerFactory or ETAP do exactly this on networks with thousands of buses, and handle the unbalanced cases with symmetrical components.</li>
+</ol>
+<hr>
+</section>
+<section id="sld-versus-other-drawings" class="level2">
+<h2 class="anchored" data-anchor-id="sld-versus-other-drawings">SLD versus other drawings</h2>
+<p>An SLD is one drawing in a set. Each answers a different question.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Drawing</th>
+<th>Shows</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single line diagram</td>
+<td>Topology, ratings, protection, switching state</td>
+<td>Planning, operation, fault and load flow studies</td>
+</tr>
+<tr class="even">
+<td>Three line diagram</td>
+<td>Each phase, CT and VT connections</td>
+<td>Protection and metering wiring</td>
+</tr>
+<tr class="odd">
+<td>Schematic (protection and control)</td>
+<td>Relay logic, trip and close circuits, interlocks</td>
+<td>Commissioning and fault finding</td>
+</tr>
+<tr class="even">
+<td>General arrangement</td>
+<td>Physical layout and clearances</td>
+<td>Construction and access</td>
+</tr>
+<tr class="odd">
+<td>Cable schedule</td>
+<td>Every cable, its route, size and terminations</td>
+<td>Installation and maintenance</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="australian-practice" class="level2">
+<h2 class="anchored" data-anchor-id="australian-practice">Australian practice</h2>
+<ul>
+<li><strong>Voltages.</strong> Transmission runs at 275 or 330 kV, and up to 500 kV in the southern states. Sub-transmission runs at 132, 110, 66 or 33 kV. Distribution is mostly 11 kV, with 22 kV in some states and SWER lines in rural areas. Low voltage is 400/230 V under AS 60038.</li>
+<li><strong>Symbols.</strong> Drawings use IEC 60617 style symbols. Older drawings may use the earlier AS 1102 series.</li>
+<li><strong>Who owns which SLD.</strong> Each distribution network service provider (DNSP), such as Energex or Ergon Energy in Queensland, keeps its own drafting standards and the operating diagram for its network. Customer installations behind the connection point are the customer’s drawing.</li>
+<li><strong>When you will be asked for one.</strong> HV customer connections and embedded generation connections (solar, batteries, generators) normally need an SLD with the connection application. The DNSP checks protection, export limits and fault level contribution against it. Inverter systems are installed to AS/NZS 4777.1, and a clear SLD is part of the standard handover documentation.</li>
+</ul>
+<hr>
+</section>
+<section id="checklist-for-reading-any-sld" class="level2">
+<h2 class="anchored" data-anchor-id="checklist-for-reading-any-sld">Checklist for reading any SLD</h2>
+<ol type="1">
+<li>Find the sources: grid supply, generators and inverters.</li>
+<li>Follow power from each source to the loads.</li>
+<li>Note each voltage level and where transformers change it.</li>
+<li>Note every open device, and every normally open point.</li>
+<li>Identify the bus arrangement, and what one fault takes out.</li>
+<li>Read the protection numbers on each breaker.</li>
+<li>Check the fault level at each bus against the switchgear rating.</li>
+<li>Look for backfeed paths, especially from embedded generation.</li>
+</ol>
+<hr>
+</section>
+<section id="not-covered-here" class="level2">
+<h2 class="anchored" data-anchor-id="not-covered-here">Not covered here</h2>
+<ul>
+<li><strong>Protection grading.</strong> How time-current curves on 50/51 relays and fuses are coordinated so that the device nearest the fault trips first.</li>
+<li><strong>Unbalanced faults.</strong> Symmetrical components, and single phase to earth fault currents, which depend on transformer vector group and earthing.</li>
+<li><strong>X/R ratio and peak current.</strong> The asymmetric first-cycle current that switchgear must withstand, which the simple calculation above ignores.</li>
+<li><strong>Earthing systems.</strong> MEN (multiple earthed neutral) in Australian LV installations, and step and touch voltage at substations.</li>
+<li><strong>Arc flash.</strong> Incident energy studies, which start from the bus fault levels computed here.</li>
+</ul>
+<hr>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bthek1\.github\.io\/Electrical_Docs");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<script src="https://utteranc.es/client.js" repo="quarto-dev/quarto-web" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./three_phase_power_systems.html" class="pagination-link" aria-label="Three-Phase Power Systems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Three-Phase Power Systems</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./control_systems.html" class="pagination-link" aria-label="Control Systems">
+        <span class="nav-page-text">Control Systems</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">
+<p>Trademark</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/bthek1/Electrical_Docs/issues">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/index.html">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/bthek1/Electrical_Docs/blob/main/06_Utility_SLD.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Electrical_Docs/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bthek1/Electrical_Docs">
+      <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/benedict-thekkel/">
+      <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

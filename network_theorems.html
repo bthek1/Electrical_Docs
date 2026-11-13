@@ -1,0 +1,3707 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benedict Thekkel">
+<meta name="description" content="Superposition, source transformation, Thevenin, Norton and maximum power transfer, each checked against a full nodal solution of one example circuit.">
+
+<title>Network Theorems – Electrical_Docs</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./three_phase_power_systems.html" rel="next">
+<link href="./electricity_equations.html" rel="prev">
+<link href="./favi.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8e10d5f78f84c68f34904ffd70ceca7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e0bec6286bfda571ec17f309cbd30a0a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8e10d5f78f84c68f34904ffd70ceca7c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Network Theorems – Electrical_Docs">
+<meta property="og:description" content="Superposition, source transformation, Thevenin, Norton and maximum power transfer, each checked against a full nodal solution of one example circuit.">
+<meta property="og:image" content="https://bthek1.github.io/Electrical_Docs/04_network_example.svg">
+<meta property="og:site_name" content="Electrical_Docs">
+<meta name="twitter:title" content="Network Theorems – Electrical_Docs">
+<meta name="twitter:description" content="Superposition, source transformation, Thevenin, Norton and maximum power transfer, each checked against a full nodal solution of one example circuit.">
+<meta name="twitter:image" content="https://bthek1.github.io/Electrical_Docs/04_network_example.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./Logo.svg" alt="Benedict Thekkel" class="navbar-logo light-content">
+    <img src="./Logo.svg" alt="Benedict Thekkel" class="navbar-logo dark-content">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-docs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Docs</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-docs">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/bthek1_blog/">
+ <span class="dropdown-text">Blog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Ideas/">
+ <span class="dropdown-text">Ideas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Other/">
+ <span class="dropdown-text">Other</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-business" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Business</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-business">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Business_docs/">
+ <span class="dropdown-text">Business Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Finances/">
+ <span class="dropdown-text">Finances</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-web">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Web_development/">
+ <span class="dropdown-text">Web Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Front_End/">
+ <span class="dropdown-text">Front End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Back_End/">
+ <span class="dropdown-text">Back End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/IaaS_docs/">
+ <span class="dropdown-text">IaaS Docs</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-machine-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Machine Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-machine-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_methods/">
+ <span class="dropdown-text">ML Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_Timeseries/">
+ <span class="dropdown-text">ML Timeseries</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-deep-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-deep-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/FastAI_course/">
+ <span class="dropdown-text">FastAI course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_methods/">
+ <span class="dropdown-text">DL Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_tasks/">
+ <span class="dropdown-text">DL Tasks</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Software_Tools/">
+ <span class="dropdown-text">Software Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Hardware_Tools/">
+ <span class="dropdown-text">Hardware Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Electrical_Docs/">
+ <span class="dropdown-text">Electrical Docs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Python_Libs/">
+ <span class="dropdown-text">Python Libs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/nbdevAuto/">
+ <span class="dropdown-text">Nbdev Automation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ROS2_docs/">
+ <span class="dropdown-text">ROS2 Docs</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Github"><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs">
+              <i class="bi bi-code-slash pe-1"></i>
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs/issues/new">
+              <i class="bi bi-bug pe-1"></i>
+            Report a Bug
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs/issues/new">
+              <i class="bi bi-chat-right-text pe-1"></i>
+            Ask a Question
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/bthek1/Electrical_Docs/issues">
+              <i class="bi bi-list-ul pe-1"></i>
+            All Issues
+            </a>
+          </li>
+      </ul>
+    </div>
+    <a href="https://www.linkedin.com/in/benedict-thekkel/" title="" class="quarto-navigation-tool px-1" aria-label="Linkedin"><i class="bi bi-linkedin"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./network_theorems.html">Network Theorems</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Docs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./physics_equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Physics Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electromagnetic_equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electromagnetic Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electricity_equations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electricity Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./network_theorems.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Network Theorems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./three_phase_power_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-Phase Power Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./utility_sld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Utility Single Line Diagrams</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./control_systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Control Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Design</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fft_examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Darts - Fast Fourier Transform Forecasting Model (FFT)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electricity_load_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nixtla - Electricity Load Forecast</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electricity_peak_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nixtla - Detect Demand Peaks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./iotawatt_battery_roi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sense -&gt; Analyze -&gt; Decide: From IotaWatt to a Home-Battery ROI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electrical_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./electrical_switch_components.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electrical Switch Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Electrical Motors</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/electric_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electric Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/servos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Servo Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/stepper_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stepper Motors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Electrical_Motors/brushless_motors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Brushless Motors (BLDC / PMSM)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#linearity-is-the-whole-idea" id="toc-linearity-is-the-whole-idea" class="nav-link active" data-scroll-target="#linearity-is-the-whole-idea">Linearity is the whole idea</a></li>
+  <li><a href="#the-example-circuit" id="toc-the-example-circuit" class="nav-link" data-scroll-target="#the-example-circuit">The example circuit</a></li>
+  <li><a href="#nodal-analysis-the-reference-answer" id="toc-nodal-analysis-the-reference-answer" class="nav-link" data-scroll-target="#nodal-analysis-the-reference-answer">Nodal analysis: the reference answer</a></li>
+  <li><a href="#superposition" id="toc-superposition" class="nav-link" data-scroll-target="#superposition">Superposition</a></li>
+  <li><a href="#source-transformation" id="toc-source-transformation" class="nav-link" data-scroll-target="#source-transformation">Source transformation</a></li>
+  <li><a href="#thevenin-equivalent" id="toc-thevenin-equivalent" class="nav-link" data-scroll-target="#thevenin-equivalent">Thevenin equivalent</a></li>
+  <li><a href="#norton-equivalent" id="toc-norton-equivalent" class="nav-link" data-scroll-target="#norton-equivalent">Norton equivalent</a></li>
+  <li><a href="#maximum-power-transfer" id="toc-maximum-power-transfer" class="nav-link" data-scroll-target="#maximum-power-transfer">Maximum power transfer</a></li>
+  <li><a href="#when-the-shortcuts-fail" id="toc-when-the-shortcuts-fail" class="nav-link" data-scroll-target="#when-the-shortcuts-fail">When the shortcuts fail</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/bthek1/Electrical_Docs/blob/main/04_Network_Theorems.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Electrical_Docs/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Network Theorems</h1>
+</div>
+
+<div>
+  <div class="description">
+    Superposition, source transformation, Thevenin, Norton and maximum power transfer, each checked against a full nodal solution of one example circuit.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benedict Thekkel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p><a href="./electricity_equations.html">Electricity Equations</a> ends at Ohm’s law and Kirchhoff’s laws. Those two laws can solve any linear circuit, but they make you solve the whole circuit every time. The theorems on this page are shortcuts. They let you replace most of a circuit with something much smaller, and then ask questions about the part you care about.</p>
+<p>Every theorem here is checked in code against a full nodal solution of the same circuit. If a shortcut and the full solution disagree, the assertions at the end of each section fail.</p>
+<section id="linearity-is-the-whole-idea" class="level2">
+<h2 class="anchored" data-anchor-id="linearity-is-the-whole-idea">Linearity is the whole idea</h2>
+<p>A circuit built from resistors, independent sources and linear dependent sources is <strong>linear</strong>. Every node voltage and every branch current is a weighted sum of the source values. Double every source and every current doubles. Two consequences follow, and every theorem on this page is one of them.</p>
+<ol type="1">
+<li><strong>Superposition.</strong> Because the response is a sum, you can find each source’s share separately and add the shares.</li>
+<li><strong>Equivalence.</strong> Seen from two terminals, a linear network has a straight-line voltage-current characteristic. A straight line needs only two numbers to describe it. So any such network, however large, can be replaced by two elements: a source and a resistance. Thevenin and Norton are the two ways to write that line.</li>
+</ol>
+<p>The theorems break as soon as something is not linear. A diode, a saturating transformer core or a transistor at its limits all have curved characteristics. The <a href="#when-the-shortcuts-fail">last section</a> covers what to do then.</p>
+<hr>
+</section>
+<section id="the-example-circuit" class="level2">
+<h2 class="anchored" data-anchor-id="the-example-circuit">The example circuit</h2>
+<p>One circuit runs through the whole page. It has a voltage source, a current source and three resistors. A load resistor <span class="math inline">\(R_L\)</span> connects across terminals a and b. The question is always the same: what current flows in <span class="math inline">\(R_L\)</span>, for any value of <span class="math inline">\(R_L\)</span>?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04_network_example.svg" class="img-fluid figure-img"></p>
+<figcaption>Example circuit: V1 = 12 V in series with R1 = 4 ohm feeds node A; R3 = 6 ohm runs from A to ground; R2 = 2 ohm joins A to node B; current source Is = 2 A injects into B; load RL sits across terminals a and b. Its Thevenin equivalent is 16 V in series with 4.4 ohm, and its Norton equivalent is 3.64 A in parallel with 4.4 ohm.</figcaption>
+</figure>
+</div>
+<p>The right-hand panels are the answer this page works towards. Seen from terminals a and b, the whole left-hand circuit behaves exactly like a 16 V source behind 4.4 <span class="math inline">\(\Omega\)</span>.</p>
+<hr>
+</section>
+<section id="nodal-analysis-the-reference-answer" class="level2">
+<h2 class="anchored" data-anchor-id="nodal-analysis-the-reference-answer">Nodal analysis: the reference answer</h2>
+<p>Nodal analysis writes Kirchhoff’s current law at every node whose voltage is unknown. Ground is the reference, so the unknowns are <span class="math inline">\(V_A\)</span> and <span class="math inline">\(V_B\)</span>. Current leaving each node through each branch sums to zero:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3} &amp; -\frac{1}{R_2} \\
+-\frac{1}{R_2} &amp; \frac{1}{R_2}+\frac{1}{R_L}
+\end{bmatrix}
+\begin{bmatrix} V_A \\ V_B \end{bmatrix}
+=
+\begin{bmatrix} V_1 / R_1 \\ I_s \end{bmatrix}
+\]</span></p>
+<p>The matrix is the <strong>conductance matrix</strong> <span class="math inline">\(G\)</span>. Its diagonal holds the total conductance at each node, and each off-diagonal term is minus the conductance joining two nodes. The right-hand side holds the source currents pushed into each node. Solving <span class="math inline">\(G\,v = i\)</span> is one call to <code>np.linalg.solve</code>. Circuit simulators such as SPICE build the same matrix, only larger.</p>
+<div id="7ef7d364" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyecharts <span class="im">import</span> options <span class="im">as</span> opts</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyecharts.charts <span class="im">import</span> Line, Bar</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyecharts.<span class="bu">globals</span> <span class="im">import</span> CurrentConfig</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># assets.pyecharts.org served an expired TLS cert on 2026-11-11; pin the jsDelivr mirror</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>CurrentConfig.ONLINE_HOST <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/gh/pyecharts/pyecharts-assets@f2328d558550046fc5449672a6850e848e141590/assets/v6/"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>R1, R2, R3 <span class="op">=</span> <span class="fl">4.0</span>, <span class="fl">2.0</span>, <span class="fl">6.0</span>   <span class="co"># ohm</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>V1, Is <span class="op">=</span> <span class="fl">12.0</span>, <span class="fl">2.0</span>           <span class="co"># V, A</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> solve(V1<span class="op">=</span>V1, Is<span class="op">=</span>Is, RL<span class="op">=</span>np.inf):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Node voltages (VA, VB) by nodal analysis. RL=inf leaves terminals a-b open."</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    gL <span class="op">=</span> <span class="fl">0.0</span> <span class="cf">if</span> np.isinf(RL) <span class="cf">else</span> <span class="dv">1</span> <span class="op">/</span> RL</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> np.array([[<span class="dv">1</span><span class="op">/</span>R1 <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>R2 <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>R3, <span class="op">-</span><span class="dv">1</span><span class="op">/</span>R2],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                  [<span class="op">-</span><span class="dv">1</span><span class="op">/</span>R2,               <span class="dv">1</span><span class="op">/</span>R2 <span class="op">+</span> gL]])</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> np.array([V1 <span class="op">/</span> R1, Is])</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.linalg.solve(G, i)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>RL <span class="op">=</span> <span class="fl">10.0</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>VA, VB <span class="op">=</span> solve(RL<span class="op">=</span>RL)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>I_L <span class="op">=</span> VB <span class="op">/</span> RL</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"VA = </span><span class="sc">{</span>VA<span class="sc">:.4f}</span><span class="ss"> V   VB = </span><span class="sc">{</span>VB<span class="sc">:.4f}</span><span class="ss"> V   I_L = </span><span class="sc">{</span>I_L<span class="sc">:.4f}</span><span class="ss"> A"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>VA = 9.3333 V   VB = 11.1111 V   I_L = 1.1111 A</code></pre>
+</div>
+</div>
+<p>With a 10 <span class="math inline">\(\Omega\)</span> load, <span class="math inline">\(V_B = 11.11\)</span> V and the load carries 1.111 A. Every method below must reproduce that number.</p>
+<hr>
+</section>
+<section id="superposition" class="level2">
+<h2 class="anchored" data-anchor-id="superposition">Superposition</h2>
+<p>Turn off every source except one, solve, and repeat for each source. The real response is the sum of the partial responses.</p>
+<p>“Turn off” has a precise meaning. A voltage source switched off is a 0 V source, which is a <strong>short circuit</strong>. A current source switched off is a 0 A source, which is an <strong>open circuit</strong>. Getting these backwards is the most common mistake with this theorem.</p>
+<div id="a4e557d7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>VB_v1 <span class="op">=</span> solve(V1<span class="op">=</span>V1, Is<span class="op">=</span><span class="fl">0.0</span>, RL<span class="op">=</span>RL)[<span class="dv">1</span>]   <span class="co"># Is open</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>VB_is <span class="op">=</span> solve(V1<span class="op">=</span><span class="fl">0.0</span>, Is<span class="op">=</span>Is, RL<span class="op">=</span>RL)[<span class="dv">1</span>]   <span class="co"># V1 shorted</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"V1 alone: </span><span class="sc">{</span>VB_v1<span class="sc">:.4f}</span><span class="ss"> V   Is alone: </span><span class="sc">{</span>VB_is<span class="sc">:.4f}</span><span class="ss"> V"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sum:      </span><span class="sc">{</span>VB_v1 <span class="op">+</span> VB_is<span class="sc">:.4f}</span><span class="ss"> V   full solution: </span><span class="sc">{</span>VB<span class="sc">:.4f}</span><span class="ss"> V"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>P_full <span class="op">=</span> VB<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> RL</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>P_parts <span class="op">=</span> VB_v1<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> RL <span class="op">+</span> VB_is<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> RL</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"load power: full </span><span class="sc">{</span>P_full<span class="sc">:.3f}</span><span class="ss"> W, sum of partial powers </span><span class="sc">{</span>P_parts<span class="sc">:.3f}</span><span class="ss"> W"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>V1 alone: 5.0000 V   Is alone: 6.1111 V
+sum:      11.1111 V   full solution: 11.1111 V
+load power: full 12.346 W, sum of partial powers 6.235 W</code></pre>
+</div>
+</div>
+<p>The voltages add up exactly: 5 V from <span class="math inline">\(V_1\)</span> plus 6.11 V from <span class="math inline">\(I_s\)</span> gives 11.11 V. The powers do not. Power goes as voltage squared, and <span class="math inline">\((a+b)^2 \neq a^2 + b^2\)</span>. <strong>Superposition works for voltages and currents, never for power.</strong> Find the total voltage or current first, then compute power from it.</p>
+<hr>
+</section>
+<section id="source-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="source-transformation">Source transformation</h2>
+<p>A voltage source <span class="math inline">\(V\)</span> in series with a resistor <span class="math inline">\(R\)</span> and a current source <span class="math inline">\(V/R\)</span> in parallel with the same <span class="math inline">\(R\)</span> look identical from their terminals. Both give <span class="math inline">\(V\)</span> when open-circuited and <span class="math inline">\(V/R\)</span> when short-circuited. Since a linear two-terminal network is fully described by those two points, the two are interchangeable.</p>
+<p>Swapping one form for the other lets you collapse a ladder circuit by hand. Series resistors add in the voltage-source form, and parallel current sources add in the current-source form. The cell below folds the example circuit down to a single source, one step at a time.</p>
+<div id="9c887604" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> par(a, b):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> b <span class="op">/</span> (a <span class="op">+</span> b)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>steps <span class="op">=</span> []</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> V1 <span class="op">/</span> R1                      <span class="co"># 1. V1 + R1 in series  -&gt;  3 A parallel with R1</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> R1</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>steps.append((<span class="st">"V1, R1 as a current source"</span>, I, <span class="st">"A"</span>, R))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> par(R, R3)                   <span class="co"># 2. R3 is now in parallel: combine</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>steps.append((<span class="st">"absorb R3 in parallel"</span>, I, <span class="st">"A"</span>, R))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> I <span class="op">*</span> R<span class="op">;</span> I <span class="op">=</span> <span class="va">None</span>              <span class="co"># 3. back to a voltage source</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>steps.append((<span class="st">"convert to a voltage source"</span>, V, <span class="st">"V"</span>, R))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> R <span class="op">+</span> R2                       <span class="co"># 4. R2 is in series: add</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>steps.append((<span class="st">"absorb R2 in series"</span>, V, <span class="st">"V"</span>, R))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> V <span class="op">/</span> R                        <span class="co"># 5. to a current source, then add Is in parallel</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> I <span class="op">+</span> Is</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>steps.append((<span class="st">"convert, then add Is in parallel"</span>, I, <span class="st">"A"</span>, R))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, val, unit, r <span class="kw">in</span> steps:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:34s}</span><span class="ss"> </span><span class="sc">{</span>val<span class="sc">:7.4f}</span><span class="ss"> </span><span class="sc">{</span>unit<span class="sc">}</span><span class="ss">   with </span><span class="sc">{</span>r<span class="sc">:.4f}</span><span class="ss"> ohm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>V1, R1 as a current source          3.0000 A   with 4.0000 ohm
+absorb R3 in parallel               3.0000 A   with 2.4000 ohm
+convert to a voltage source         7.2000 V   with 2.4000 ohm
+absorb R2 in series                 7.2000 V   with 4.4000 ohm
+convert, then add Is in parallel    3.6364 A   with 4.4000 ohm</code></pre>
+</div>
+</div>
+<p>Five steps reduce the circuit to a 3.636 A source in parallel with 4.4 <span class="math inline">\(\Omega\)</span>. That is the Norton equivalent in the diagram, found without writing a single equation.</p>
+<hr>
+</section>
+<section id="thevenin-equivalent" class="level2">
+<h2 class="anchored" data-anchor-id="thevenin-equivalent">Thevenin equivalent</h2>
+<p><strong>Thevenin’s theorem:</strong> any linear two-terminal network can be replaced by a voltage source <span class="math inline">\(V_{th}\)</span> in series with a resistance <span class="math inline">\(R_{th}\)</span>.</p>
+<ul>
+<li><span class="math inline">\(V_{th}\)</span> is the <strong>open-circuit voltage</strong> across the terminals, with no load connected.</li>
+<li><span class="math inline">\(R_{th}\)</span> is the resistance seen looking into the terminals with every independent source switched off.</li>
+</ul>
+<p>There is a second way to find <span class="math inline">\(R_{th}\)</span>: short the terminals, measure the short-circuit current <span class="math inline">\(I_{sc}\)</span>, and take <span class="math inline">\(R_{th} = V_{oc} / I_{sc}\)</span>. This version also works on a real box you cannot open, and on circuits with dependent sources, which cannot be switched off.</p>
+<div id="c5d1720a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>V_th <span class="op">=</span> solve(RL<span class="op">=</span>np.inf)[<span class="dv">1</span>]                  <span class="co"># open circuit</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>R_th_off <span class="op">=</span> R2 <span class="op">+</span> par(R1, R3)                 <span class="co"># sources off: V1 shorted, Is open</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>VA_sc <span class="op">=</span> (V1 <span class="op">/</span> R1) <span class="op">/</span> (<span class="dv">1</span><span class="op">/</span>R1 <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>R2 <span class="op">+</span> <span class="dv">1</span><span class="op">/</span>R3)    <span class="co"># terminals shorted: VB = 0</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>I_sc <span class="op">=</span> VA_sc <span class="op">/</span> R2 <span class="op">+</span> Is</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>R_th_meas <span class="op">=</span> V_th <span class="op">/</span> I_sc</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"V_th = </span><span class="sc">{</span>V_th<span class="sc">:.4f}</span><span class="ss"> V"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R_th = </span><span class="sc">{</span>R_th_off<span class="sc">:.4f}</span><span class="ss"> ohm (sources off)   </span><span class="sc">{</span>R_th_meas<span class="sc">:.4f}</span><span class="ss"> ohm (Voc / Isc)"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"I_sc = </span><span class="sc">{</span>I_sc<span class="sc">:.4f}</span><span class="ss"> A"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>loads <span class="op">=</span> np.logspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">200</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>I_nodal <span class="op">=</span> np.array([solve(RL<span class="op">=</span>r)[<span class="dv">1</span>] <span class="op">/</span> r <span class="cf">for</span> r <span class="kw">in</span> loads])</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>I_thev <span class="op">=</span> V_th <span class="op">/</span> (R_th_off <span class="op">+</span> loads)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"worst disagreement over 0.1 to 1000 ohm loads: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">abs</span>(I_nodal <span class="op">-</span> I_thev)<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.2e}</span><span class="ss"> A"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>V_th = 16.0000 V
+R_th = 4.4000 ohm (sources off)   4.4000 ohm (Voc / Isc)
+I_sc = 3.6364 A
+worst disagreement over 0.1 to 1000 ohm loads: 8.88e-16 A</code></pre>
+</div>
+</div>
+<p>Both routes give <span class="math inline">\(R_{th} = 4.4\ \Omega\)</span>. Across 200 load values from 0.1 <span class="math inline">\(\Omega\)</span> to 1 k<span class="math inline">\(\Omega\)</span>, the two-element model matches the full nodal solution to within rounding error. The left-hand circuit and its Thevenin equivalent cannot be told apart from terminals a and b.</p>
+<hr>
+</section>
+<section id="norton-equivalent" class="level2">
+<h2 class="anchored" data-anchor-id="norton-equivalent">Norton equivalent</h2>
+<p><strong>Norton’s theorem</strong> writes the same straight line the other way: a current source <span class="math inline">\(I_N = I_{sc}\)</span> in parallel with <span class="math inline">\(R_N = R_{th}\)</span>. Source transformation turns one into the other, so the two theorems are really one result.</p>
+<p>Which form to use depends on the load. Thevenin suits a load in series, because the resistances simply add. Norton suits loads in parallel, because conductances add and the current divides. With Norton, the load current is a <strong>current divider</strong>:</p>
+<p><span class="math display">\[I_L = I_N \frac{R_N}{R_N + R_L}\]</span></p>
+<div id="3884a8d1" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>I_N, R_N <span class="op">=</span> I_sc, R_th_off</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>I_norton <span class="op">=</span> I_N <span class="op">*</span> R_N <span class="op">/</span> (R_N <span class="op">+</span> RL)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"I_N = </span><span class="sc">{</span>I_N<span class="sc">:.4f}</span><span class="ss"> A, R_N = </span><span class="sc">{</span>R_N<span class="sc">:.4f}</span><span class="ss"> ohm -&gt; I_L = </span><span class="sc">{</span>I_norton<span class="sc">:.4f}</span><span class="ss"> A (nodal: </span><span class="sc">{</span>I_L<span class="sc">:.4f}</span><span class="ss"> A)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>I_N = 3.6364 A, R_N = 4.4000 ohm -&gt; I_L = 1.1111 A (nodal: 1.1111 A)</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="maximum-power-transfer" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-power-transfer">Maximum power transfer</h2>
+<p>With the circuit reduced to <span class="math inline">\(V_{th}\)</span> and <span class="math inline">\(R_{th}\)</span>, the power delivered to the load is a one-line function of <span class="math inline">\(R_L\)</span>:</p>
+<p><span class="math display">\[P_L = \frac{V_{th}^2 R_L}{(R_{th}+R_L)^2}\]</span></p>
+<p>Setting <span class="math inline">\(dP_L/dR_L = 0\)</span> gives <span class="math inline">\(R_L = R_{th}\)</span>, and then <span class="math inline">\(P_{max} = V_{th}^2 / 4R_{th}\)</span>. This is the <strong>maximum power transfer theorem</strong>.</p>
+<p>The catch shows up in the efficiency. At the matched point, the same current flows through <span class="math inline">\(R_{th}\)</span> and <span class="math inline">\(R_L\)</span>, and the two are equal, so exactly half the power is burnt inside the source. The chart shows both curves.</p>
+<div id="a9b6d499" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rl <span class="op">=</span> np.<span class="bu">round</span>(np.arange(<span class="fl">0.2</span>, <span class="fl">40.01</span>, <span class="fl">0.2</span>), <span class="dv">1</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> V_th<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> rl <span class="op">/</span> (R_th_off <span class="op">+</span> rl)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>eff <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> rl <span class="op">/</span> (R_th_off <span class="op">+</span> rl)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> (</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    Line(init_opts<span class="op">=</span>opts.InitOpts(width<span class="op">=</span><span class="st">"100%"</span>, height<span class="op">=</span><span class="st">"380px"</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    .add_xaxis([<span class="ss">f"</span><span class="sc">{</span>x<span class="sc">:.1f}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> rl])</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    .add_yaxis(<span class="st">"load power (W)"</span>, [<span class="bu">round</span>(<span class="bu">float</span>(v), <span class="dv">3</span>) <span class="cf">for</span> v <span class="kw">in</span> p], is_symbol_show<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>               markline_opts<span class="op">=</span>opts.MarkLineOpts(data<span class="op">=</span>[opts.MarkLineItem(x<span class="op">=</span><span class="st">"4.4"</span>, name<span class="op">=</span><span class="st">"RL = Rth"</span>)],</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                               label_opts<span class="op">=</span>opts.LabelOpts(formatter<span class="op">=</span><span class="st">"RL = Rth"</span>)))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    .add_yaxis(<span class="st">"efficiency (%)"</span>, [<span class="bu">round</span>(<span class="bu">float</span>(v), <span class="dv">2</span>) <span class="cf">for</span> v <span class="kw">in</span> eff], yaxis_index<span class="op">=</span><span class="dv">1</span>, is_symbol_show<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    .extend_axis(yaxis<span class="op">=</span>opts.AxisOpts(name<span class="op">=</span><span class="st">"efficiency (%)"</span>, min_<span class="op">=</span><span class="dv">0</span>, max_<span class="op">=</span><span class="dv">100</span>))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    .set_series_opts(label_opts<span class="op">=</span>opts.LabelOpts(is_show<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    .set_global_opts(</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        title_opts<span class="op">=</span>opts.TitleOpts(title<span class="op">=</span><span class="st">"Load power and efficiency against load resistance"</span>),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        xaxis_opts<span class="op">=</span>opts.AxisOpts(name<span class="op">=</span><span class="st">"RL (ohm)"</span>, boundary_gap<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        yaxis_opts<span class="op">=</span>opts.AxisOpts(name<span class="op">=</span><span class="st">"power (W)"</span>),</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        tooltip_opts<span class="op">=</span>opts.TooltipOpts(trigger<span class="op">=</span><span class="st">"axis"</span>),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        legend_opts<span class="op">=</span>opts.LegendOpts(pos_top<span class="op">=</span><span class="st">"8%"</span>),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"peak at RL = </span><span class="sc">{</span>rl[p.argmax()]<span class="sc">:.1f}</span><span class="ss"> ohm, P_max = </span><span class="sc">{</span>p<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.3f}</span><span class="ss"> W, efficiency there = </span><span class="sc">{</span>eff[p.argmax()]<span class="sc">:.0f}</span><span class="ss"> %"</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>chart.render_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>peak at RL = 4.4 ohm, P_max = 14.545 W, efficiency there = 50 %</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://cdn.jsdelivr.net/gh/pyecharts/pyecharts-assets@f2328d558550046fc5449672a6850e848e141590/assets/v6/echarts.min'
+        }
+    });
+</script>
+
+        <div id="d75cf5ac3b6b40a99896ef5f82adb910" style="width:100%; height:380px;"></div>
+
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_d75cf5ac3b6b40a99896ef5f82adb910 = echarts.init(
+                    document.getElementById('d75cf5ac3b6b40a99896ef5f82adb910'), 'white', {renderer: 'canvas', locale: 'ZH'});
+                var option_d75cf5ac3b6b40a99896ef5f82adb910 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "series": [
+        {
+            "type": "line",
+            "name": "load power (W)",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbolSize": 4,
+            "showSymbol": false,
+            "smooth": false,
+            "clip": true,
+            "step": false,
+            "stackStrategy": "samesign",
+            "data": [
+                [
+                    "0.2",
+                    2.42
+                ],
+                [
+                    "0.4",
+                    4.444
+                ],
+                [
+                    "0.6",
+                    6.144
+                ],
+                [
+                    "0.8",
+                    7.574
+                ],
+                [
+                    "1.0",
+                    8.779
+                ],
+                [
+                    "1.2",
+                    9.796
+                ],
+                [
+                    "1.4",
+                    10.654
+                ],
+                [
+                    "1.6",
+                    11.378
+                ],
+                [
+                    "1.8",
+                    11.988
+                ],
+                [
+                    "2.0",
+                    12.5
+                ],
+                [
+                    "2.2",
+                    12.929
+                ],
+                [
+                    "2.4",
+                    13.287
+                ],
+                [
+                    "2.6",
+                    13.584
+                ],
+                [
+                    "2.8",
+                    13.827
+                ],
+                [
+                    "3.0",
+                    14.025
+                ],
+                [
+                    "3.2",
+                    14.183
+                ],
+                [
+                    "3.4",
+                    14.306
+                ],
+                [
+                    "3.6",
+                    14.4
+                ],
+                [
+                    "3.8",
+                    14.468
+                ],
+                [
+                    "4.0",
+                    14.512
+                ],
+                [
+                    "4.2",
+                    14.538
+                ],
+                [
+                    "4.4",
+                    14.545
+                ],
+                [
+                    "4.6",
+                    14.538
+                ],
+                [
+                    "4.8",
+                    14.518
+                ],
+                [
+                    "5.0",
+                    14.486
+                ],
+                [
+                    "5.2",
+                    14.444
+                ],
+                [
+                    "5.4",
+                    14.394
+                ],
+                [
+                    "5.6",
+                    14.336
+                ],
+                [
+                    "5.8",
+                    14.271
+                ],
+                [
+                    "6.0",
+                    14.201
+                ],
+                [
+                    "6.2",
+                    14.126
+                ],
+                [
+                    "6.4",
+                    14.047
+                ],
+                [
+                    "6.6",
+                    13.964
+                ],
+                [
+                    "6.8",
+                    13.878
+                ],
+                [
+                    "7.0",
+                    13.789
+                ],
+                [
+                    "7.2",
+                    13.698
+                ],
+                [
+                    "7.4",
+                    13.605
+                ],
+                [
+                    "7.6",
+                    13.511
+                ],
+                [
+                    "7.8",
+                    13.416
+                ],
+                [
+                    "8.0",
+                    13.319
+                ],
+                [
+                    "8.2",
+                    13.222
+                ],
+                [
+                    "8.4",
+                    13.125
+                ],
+                [
+                    "8.6",
+                    13.027
+                ],
+                [
+                    "8.8",
+                    12.929
+                ],
+                [
+                    "9.0",
+                    12.831
+                ],
+                [
+                    "9.2",
+                    12.734
+                ],
+                [
+                    "9.4",
+                    12.636
+                ],
+                [
+                    "9.6",
+                    12.539
+                ],
+                [
+                    "9.8",
+                    12.442
+                ],
+                [
+                    "10.0",
+                    12.346
+                ],
+                [
+                    "10.2",
+                    12.25
+                ],
+                [
+                    "10.4",
+                    12.155
+                ],
+                [
+                    "10.6",
+                    12.06
+                ],
+                [
+                    "10.8",
+                    11.967
+                ],
+                [
+                    "11.0",
+                    11.874
+                ],
+                [
+                    "11.2",
+                    11.782
+                ],
+                [
+                    "11.4",
+                    11.69
+                ],
+                [
+                    "11.6",
+                    11.6
+                ],
+                [
+                    "11.8",
+                    11.51
+                ],
+                [
+                    "12.0",
+                    11.422
+                ],
+                [
+                    "12.2",
+                    11.334
+                ],
+                [
+                    "12.4",
+                    11.247
+                ],
+                [
+                    "12.6",
+                    11.161
+                ],
+                [
+                    "12.8",
+                    11.076
+                ],
+                [
+                    "13.0",
+                    10.992
+                ],
+                [
+                    "13.2",
+                    10.909
+                ],
+                [
+                    "13.4",
+                    10.827
+                ],
+                [
+                    "13.6",
+                    10.746
+                ],
+                [
+                    "13.8",
+                    10.665
+                ],
+                [
+                    "14.0",
+                    10.586
+                ],
+                [
+                    "14.2",
+                    10.508
+                ],
+                [
+                    "14.4",
+                    10.43
+                ],
+                [
+                    "14.6",
+                    10.353
+                ],
+                [
+                    "14.8",
+                    10.278
+                ],
+                [
+                    "15.0",
+                    10.203
+                ],
+                [
+                    "15.2",
+                    10.129
+                ],
+                [
+                    "15.4",
+                    10.056
+                ],
+                [
+                    "15.6",
+                    9.984
+                ],
+                [
+                    "15.8",
+                    9.913
+                ],
+                [
+                    "16.0",
+                    9.842
+                ],
+                [
+                    "16.2",
+                    9.773
+                ],
+                [
+                    "16.4",
+                    9.704
+                ],
+                [
+                    "16.6",
+                    9.636
+                ],
+                [
+                    "16.8",
+                    9.569
+                ],
+                [
+                    "17.0",
+                    9.503
+                ],
+                [
+                    "17.2",
+                    9.438
+                ],
+                [
+                    "17.4",
+                    9.373
+                ],
+                [
+                    "17.6",
+                    9.309
+                ],
+                [
+                    "17.8",
+                    9.246
+                ],
+                [
+                    "18.0",
+                    9.184
+                ],
+                [
+                    "18.2",
+                    9.122
+                ],
+                [
+                    "18.4",
+                    9.061
+                ],
+                [
+                    "18.6",
+                    9.001
+                ],
+                [
+                    "18.8",
+                    8.942
+                ],
+                [
+                    "19.0",
+                    8.883
+                ],
+                [
+                    "19.2",
+                    8.825
+                ],
+                [
+                    "19.4",
+                    8.768
+                ],
+                [
+                    "19.6",
+                    8.711
+                ],
+                [
+                    "19.8",
+                    8.655
+                ],
+                [
+                    "20.0",
+                    8.6
+                ],
+                [
+                    "20.2",
+                    8.545
+                ],
+                [
+                    "20.4",
+                    8.491
+                ],
+                [
+                    "20.6",
+                    8.438
+                ],
+                [
+                    "20.8",
+                    8.385
+                ],
+                [
+                    "21.0",
+                    8.333
+                ],
+                [
+                    "21.2",
+                    8.281
+                ],
+                [
+                    "21.4",
+                    8.23
+                ],
+                [
+                    "21.6",
+                    8.18
+                ],
+                [
+                    "21.8",
+                    8.13
+                ],
+                [
+                    "22.0",
+                    8.081
+                ],
+                [
+                    "22.2",
+                    8.032
+                ],
+                [
+                    "22.4",
+                    7.984
+                ],
+                [
+                    "22.6",
+                    7.936
+                ],
+                [
+                    "22.8",
+                    7.889
+                ],
+                [
+                    "23.0",
+                    7.843
+                ],
+                [
+                    "23.2",
+                    7.797
+                ],
+                [
+                    "23.4",
+                    7.751
+                ],
+                [
+                    "23.6",
+                    7.706
+                ],
+                [
+                    "23.8",
+                    7.662
+                ],
+                [
+                    "24.0",
+                    7.618
+                ],
+                [
+                    "24.2",
+                    7.574
+                ],
+                [
+                    "24.4",
+                    7.531
+                ],
+                [
+                    "24.6",
+                    7.488
+                ],
+                [
+                    "24.8",
+                    7.446
+                ],
+                [
+                    "25.0",
+                    7.404
+                ],
+                [
+                    "25.2",
+                    7.363
+                ],
+                [
+                    "25.4",
+                    7.322
+                ],
+                [
+                    "25.6",
+                    7.282
+                ],
+                [
+                    "25.8",
+                    7.242
+                ],
+                [
+                    "26.0",
+                    7.202
+                ],
+                [
+                    "26.2",
+                    7.163
+                ],
+                [
+                    "26.4",
+                    7.124
+                ],
+                [
+                    "26.6",
+                    7.086
+                ],
+                [
+                    "26.8",
+                    7.048
+                ],
+                [
+                    "27.0",
+                    7.01
+                ],
+                [
+                    "27.2",
+                    6.973
+                ],
+                [
+                    "27.4",
+                    6.936
+                ],
+                [
+                    "27.6",
+                    6.9
+                ],
+                [
+                    "27.8",
+                    6.864
+                ],
+                [
+                    "28.0",
+                    6.828
+                ],
+                [
+                    "28.2",
+                    6.793
+                ],
+                [
+                    "28.4",
+                    6.758
+                ],
+                [
+                    "28.6",
+                    6.723
+                ],
+                [
+                    "28.8",
+                    6.689
+                ],
+                [
+                    "29.0",
+                    6.655
+                ],
+                [
+                    "29.2",
+                    6.621
+                ],
+                [
+                    "29.4",
+                    6.588
+                ],
+                [
+                    "29.6",
+                    6.555
+                ],
+                [
+                    "29.8",
+                    6.522
+                ],
+                [
+                    "30.0",
+                    6.49
+                ],
+                [
+                    "30.2",
+                    6.458
+                ],
+                [
+                    "30.4",
+                    6.426
+                ],
+                [
+                    "30.6",
+                    6.395
+                ],
+                [
+                    "30.8",
+                    6.364
+                ],
+                [
+                    "31.0",
+                    6.333
+                ],
+                [
+                    "31.2",
+                    6.302
+                ],
+                [
+                    "31.4",
+                    6.272
+                ],
+                [
+                    "31.6",
+                    6.242
+                ],
+                [
+                    "31.8",
+                    6.212
+                ],
+                [
+                    "32.0",
+                    6.183
+                ],
+                [
+                    "32.2",
+                    6.154
+                ],
+                [
+                    "32.4",
+                    6.125
+                ],
+                [
+                    "32.6",
+                    6.096
+                ],
+                [
+                    "32.8",
+                    6.068
+                ],
+                [
+                    "33.0",
+                    6.04
+                ],
+                [
+                    "33.2",
+                    6.012
+                ],
+                [
+                    "33.4",
+                    5.984
+                ],
+                [
+                    "33.6",
+                    5.957
+                ],
+                [
+                    "33.8",
+                    5.93
+                ],
+                [
+                    "34.0",
+                    5.903
+                ],
+                [
+                    "34.2",
+                    5.876
+                ],
+                [
+                    "34.4",
+                    5.85
+                ],
+                [
+                    "34.6",
+                    5.824
+                ],
+                [
+                    "34.8",
+                    5.798
+                ],
+                [
+                    "35.0",
+                    5.772
+                ],
+                [
+                    "35.2",
+                    5.746
+                ],
+                [
+                    "35.4",
+                    5.721
+                ],
+                [
+                    "35.6",
+                    5.696
+                ],
+                [
+                    "35.8",
+                    5.671
+                ],
+                [
+                    "36.0",
+                    5.647
+                ],
+                [
+                    "36.2",
+                    5.622
+                ],
+                [
+                    "36.4",
+                    5.598
+                ],
+                [
+                    "36.6",
+                    5.574
+                ],
+                [
+                    "36.8",
+                    5.55
+                ],
+                [
+                    "37.0",
+                    5.526
+                ],
+                [
+                    "37.2",
+                    5.503
+                ],
+                [
+                    "37.4",
+                    5.48
+                ],
+                [
+                    "37.6",
+                    5.457
+                ],
+                [
+                    "37.8",
+                    5.434
+                ],
+                [
+                    "38.0",
+                    5.411
+                ],
+                [
+                    "38.2",
+                    5.389
+                ],
+                [
+                    "38.4",
+                    5.366
+                ],
+                [
+                    "38.6",
+                    5.344
+                ],
+                [
+                    "38.8",
+                    5.322
+                ],
+                [
+                    "39.0",
+                    5.301
+                ],
+                [
+                    "39.2",
+                    5.279
+                ],
+                [
+                    "39.4",
+                    5.258
+                ],
+                [
+                    "39.6",
+                    5.236
+                ],
+                [
+                    "39.8",
+                    5.215
+                ],
+                [
+                    "40.0",
+                    5.194
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": false,
+                "margin": 8,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": false
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "margin": 8,
+                    "formatter": "RL = Rth",
+                    "richInheritPlainLabel": true,
+                    "valueAnimation": false
+                },
+                "data": [
+                    {
+                        "name": "RL = Rth",
+                        "xAxis": "4.4"
+                    }
+                ]
+            },
+            "zlevel": 0,
+            "z": 0,
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
+            }
+        },
+        {
+            "type": "line",
+            "name": "efficiency (%)",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "yAxisIndex": 1,
+            "symbolSize": 4,
+            "showSymbol": false,
+            "smooth": false,
+            "clip": true,
+            "step": false,
+            "stackStrategy": "samesign",
+            "data": [
+                [
+                    "0.2",
+                    4.35
+                ],
+                [
+                    "0.4",
+                    8.33
+                ],
+                [
+                    "0.6",
+                    12.0
+                ],
+                [
+                    "0.8",
+                    15.38
+                ],
+                [
+                    "1.0",
+                    18.52
+                ],
+                [
+                    "1.2",
+                    21.43
+                ],
+                [
+                    "1.4",
+                    24.14
+                ],
+                [
+                    "1.6",
+                    26.67
+                ],
+                [
+                    "1.8",
+                    29.03
+                ],
+                [
+                    "2.0",
+                    31.25
+                ],
+                [
+                    "2.2",
+                    33.33
+                ],
+                [
+                    "2.4",
+                    35.29
+                ],
+                [
+                    "2.6",
+                    37.14
+                ],
+                [
+                    "2.8",
+                    38.89
+                ],
+                [
+                    "3.0",
+                    40.54
+                ],
+                [
+                    "3.2",
+                    42.11
+                ],
+                [
+                    "3.4",
+                    43.59
+                ],
+                [
+                    "3.6",
+                    45.0
+                ],
+                [
+                    "3.8",
+                    46.34
+                ],
+                [
+                    "4.0",
+                    47.62
+                ],
+                [
+                    "4.2",
+                    48.84
+                ],
+                [
+                    "4.4",
+                    50.0
+                ],
+                [
+                    "4.6",
+                    51.11
+                ],
+                [
+                    "4.8",
+                    52.17
+                ],
+                [
+                    "5.0",
+                    53.19
+                ],
+                [
+                    "5.2",
+                    54.17
+                ],
+                [
+                    "5.4",
+                    55.1
+                ],
+                [
+                    "5.6",
+                    56.0
+                ],
+                [
+                    "5.8",
+                    56.86
+                ],
+                [
+                    "6.0",
+                    57.69
+                ],
+                [
+                    "6.2",
+                    58.49
+                ],
+                [
+                    "6.4",
+                    59.26
+                ],
+                [
+                    "6.6",
+                    60.0
+                ],
+                [
+                    "6.8",
+                    60.71
+                ],
+                [
+                    "7.0",
+                    61.4
+                ],
+                [
+                    "7.2",
+                    62.07
+                ],
+                [
+                    "7.4",
+                    62.71
+                ],
+                [
+                    "7.6",
+                    63.33
+                ],
+                [
+                    "7.8",
+                    63.93
+                ],
+                [
+                    "8.0",
+                    64.52
+                ],
+                [
+                    "8.2",
+                    65.08
+                ],
+                [
+                    "8.4",
+                    65.62
+                ],
+                [
+                    "8.6",
+                    66.15
+                ],
+                [
+                    "8.8",
+                    66.67
+                ],
+                [
+                    "9.0",
+                    67.16
+                ],
+                [
+                    "9.2",
+                    67.65
+                ],
+                [
+                    "9.4",
+                    68.12
+                ],
+                [
+                    "9.6",
+                    68.57
+                ],
+                [
+                    "9.8",
+                    69.01
+                ],
+                [
+                    "10.0",
+                    69.44
+                ],
+                [
+                    "10.2",
+                    69.86
+                ],
+                [
+                    "10.4",
+                    70.27
+                ],
+                [
+                    "10.6",
+                    70.67
+                ],
+                [
+                    "10.8",
+                    71.05
+                ],
+                [
+                    "11.0",
+                    71.43
+                ],
+                [
+                    "11.2",
+                    71.79
+                ],
+                [
+                    "11.4",
+                    72.15
+                ],
+                [
+                    "11.6",
+                    72.5
+                ],
+                [
+                    "11.8",
+                    72.84
+                ],
+                [
+                    "12.0",
+                    73.17
+                ],
+                [
+                    "12.2",
+                    73.49
+                ],
+                [
+                    "12.4",
+                    73.81
+                ],
+                [
+                    "12.6",
+                    74.12
+                ],
+                [
+                    "12.8",
+                    74.42
+                ],
+                [
+                    "13.0",
+                    74.71
+                ],
+                [
+                    "13.2",
+                    75.0
+                ],
+                [
+                    "13.4",
+                    75.28
+                ],
+                [
+                    "13.6",
+                    75.56
+                ],
+                [
+                    "13.8",
+                    75.82
+                ],
+                [
+                    "14.0",
+                    76.09
+                ],
+                [
+                    "14.2",
+                    76.34
+                ],
+                [
+                    "14.4",
+                    76.6
+                ],
+                [
+                    "14.6",
+                    76.84
+                ],
+                [
+                    "14.8",
+                    77.08
+                ],
+                [
+                    "15.0",
+                    77.32
+                ],
+                [
+                    "15.2",
+                    77.55
+                ],
+                [
+                    "15.4",
+                    77.78
+                ],
+                [
+                    "15.6",
+                    78.0
+                ],
+                [
+                    "15.8",
+                    78.22
+                ],
+                [
+                    "16.0",
+                    78.43
+                ],
+                [
+                    "16.2",
+                    78.64
+                ],
+                [
+                    "16.4",
+                    78.85
+                ],
+                [
+                    "16.6",
+                    79.05
+                ],
+                [
+                    "16.8",
+                    79.25
+                ],
+                [
+                    "17.0",
+                    79.44
+                ],
+                [
+                    "17.2",
+                    79.63
+                ],
+                [
+                    "17.4",
+                    79.82
+                ],
+                [
+                    "17.6",
+                    80.0
+                ],
+                [
+                    "17.8",
+                    80.18
+                ],
+                [
+                    "18.0",
+                    80.36
+                ],
+                [
+                    "18.2",
+                    80.53
+                ],
+                [
+                    "18.4",
+                    80.7
+                ],
+                [
+                    "18.6",
+                    80.87
+                ],
+                [
+                    "18.8",
+                    81.03
+                ],
+                [
+                    "19.0",
+                    81.2
+                ],
+                [
+                    "19.2",
+                    81.36
+                ],
+                [
+                    "19.4",
+                    81.51
+                ],
+                [
+                    "19.6",
+                    81.67
+                ],
+                [
+                    "19.8",
+                    81.82
+                ],
+                [
+                    "20.0",
+                    81.97
+                ],
+                [
+                    "20.2",
+                    82.11
+                ],
+                [
+                    "20.4",
+                    82.26
+                ],
+                [
+                    "20.6",
+                    82.4
+                ],
+                [
+                    "20.8",
+                    82.54
+                ],
+                [
+                    "21.0",
+                    82.68
+                ],
+                [
+                    "21.2",
+                    82.81
+                ],
+                [
+                    "21.4",
+                    82.95
+                ],
+                [
+                    "21.6",
+                    83.08
+                ],
+                [
+                    "21.8",
+                    83.21
+                ],
+                [
+                    "22.0",
+                    83.33
+                ],
+                [
+                    "22.2",
+                    83.46
+                ],
+                [
+                    "22.4",
+                    83.58
+                ],
+                [
+                    "22.6",
+                    83.7
+                ],
+                [
+                    "22.8",
+                    83.82
+                ],
+                [
+                    "23.0",
+                    83.94
+                ],
+                [
+                    "23.2",
+                    84.06
+                ],
+                [
+                    "23.4",
+                    84.17
+                ],
+                [
+                    "23.6",
+                    84.29
+                ],
+                [
+                    "23.8",
+                    84.4
+                ],
+                [
+                    "24.0",
+                    84.51
+                ],
+                [
+                    "24.2",
+                    84.62
+                ],
+                [
+                    "24.4",
+                    84.72
+                ],
+                [
+                    "24.6",
+                    84.83
+                ],
+                [
+                    "24.8",
+                    84.93
+                ],
+                [
+                    "25.0",
+                    85.03
+                ],
+                [
+                    "25.2",
+                    85.14
+                ],
+                [
+                    "25.4",
+                    85.23
+                ],
+                [
+                    "25.6",
+                    85.33
+                ],
+                [
+                    "25.8",
+                    85.43
+                ],
+                [
+                    "26.0",
+                    85.53
+                ],
+                [
+                    "26.2",
+                    85.62
+                ],
+                [
+                    "26.4",
+                    85.71
+                ],
+                [
+                    "26.6",
+                    85.81
+                ],
+                [
+                    "26.8",
+                    85.9
+                ],
+                [
+                    "27.0",
+                    85.99
+                ],
+                [
+                    "27.2",
+                    86.08
+                ],
+                [
+                    "27.4",
+                    86.16
+                ],
+                [
+                    "27.6",
+                    86.25
+                ],
+                [
+                    "27.8",
+                    86.34
+                ],
+                [
+                    "28.0",
+                    86.42
+                ],
+                [
+                    "28.2",
+                    86.5
+                ],
+                [
+                    "28.4",
+                    86.59
+                ],
+                [
+                    "28.6",
+                    86.67
+                ],
+                [
+                    "28.8",
+                    86.75
+                ],
+                [
+                    "29.0",
+                    86.83
+                ],
+                [
+                    "29.2",
+                    86.9
+                ],
+                [
+                    "29.4",
+                    86.98
+                ],
+                [
+                    "29.6",
+                    87.06
+                ],
+                [
+                    "29.8",
+                    87.13
+                ],
+                [
+                    "30.0",
+                    87.21
+                ],
+                [
+                    "30.2",
+                    87.28
+                ],
+                [
+                    "30.4",
+                    87.36
+                ],
+                [
+                    "30.6",
+                    87.43
+                ],
+                [
+                    "30.8",
+                    87.5
+                ],
+                [
+                    "31.0",
+                    87.57
+                ],
+                [
+                    "31.2",
+                    87.64
+                ],
+                [
+                    "31.4",
+                    87.71
+                ],
+                [
+                    "31.6",
+                    87.78
+                ],
+                [
+                    "31.8",
+                    87.85
+                ],
+                [
+                    "32.0",
+                    87.91
+                ],
+                [
+                    "32.2",
+                    87.98
+                ],
+                [
+                    "32.4",
+                    88.04
+                ],
+                [
+                    "32.6",
+                    88.11
+                ],
+                [
+                    "32.8",
+                    88.17
+                ],
+                [
+                    "33.0",
+                    88.24
+                ],
+                [
+                    "33.2",
+                    88.3
+                ],
+                [
+                    "33.4",
+                    88.36
+                ],
+                [
+                    "33.6",
+                    88.42
+                ],
+                [
+                    "33.8",
+                    88.48
+                ],
+                [
+                    "34.0",
+                    88.54
+                ],
+                [
+                    "34.2",
+                    88.6
+                ],
+                [
+                    "34.4",
+                    88.66
+                ],
+                [
+                    "34.6",
+                    88.72
+                ],
+                [
+                    "34.8",
+                    88.78
+                ],
+                [
+                    "35.0",
+                    88.83
+                ],
+                [
+                    "35.2",
+                    88.89
+                ],
+                [
+                    "35.4",
+                    88.94
+                ],
+                [
+                    "35.6",
+                    89.0
+                ],
+                [
+                    "35.8",
+                    89.05
+                ],
+                [
+                    "36.0",
+                    89.11
+                ],
+                [
+                    "36.2",
+                    89.16
+                ],
+                [
+                    "36.4",
+                    89.22
+                ],
+                [
+                    "36.6",
+                    89.27
+                ],
+                [
+                    "36.8",
+                    89.32
+                ],
+                [
+                    "37.0",
+                    89.37
+                ],
+                [
+                    "37.2",
+                    89.42
+                ],
+                [
+                    "37.4",
+                    89.47
+                ],
+                [
+                    "37.6",
+                    89.52
+                ],
+                [
+                    "37.8",
+                    89.57
+                ],
+                [
+                    "38.0",
+                    89.62
+                ],
+                [
+                    "38.2",
+                    89.67
+                ],
+                [
+                    "38.4",
+                    89.72
+                ],
+                [
+                    "38.6",
+                    89.77
+                ],
+                [
+                    "38.8",
+                    89.81
+                ],
+                [
+                    "39.0",
+                    89.86
+                ],
+                [
+                    "39.2",
+                    89.91
+                ],
+                [
+                    "39.4",
+                    89.95
+                ],
+                [
+                    "39.6",
+                    90.0
+                ],
+                [
+                    "39.8",
+                    90.05
+                ],
+                [
+                    "40.0",
+                    90.09
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": false,
+                "margin": 8,
+                "richInheritPlainLabel": true,
+                "valueAnimation": false
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": false
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "zlevel": 0,
+            "z": 0,
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "load power (W)",
+                "efficiency (%)"
+            ],
+            "selected": {},
+            "show": true,
+            "top": "8%",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10,
+            "triggerEvent": false
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "axis",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "displayTransition": true,
+        "textStyle": {
+            "fontSize": 14,
+            "richInheritPlainLabel": true
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "name": "RL (ohm)",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "boundaryGap": false,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0,
+            "data": [
+                "0.2",
+                "0.4",
+                "0.6",
+                "0.8",
+                "1.0",
+                "1.2",
+                "1.4",
+                "1.6",
+                "1.8",
+                "2.0",
+                "2.2",
+                "2.4",
+                "2.6",
+                "2.8",
+                "3.0",
+                "3.2",
+                "3.4",
+                "3.6",
+                "3.8",
+                "4.0",
+                "4.2",
+                "4.4",
+                "4.6",
+                "4.8",
+                "5.0",
+                "5.2",
+                "5.4",
+                "5.6",
+                "5.8",
+                "6.0",
+                "6.2",
+                "6.4",
+                "6.6",
+                "6.8",
+                "7.0",
+                "7.2",
+                "7.4",
+                "7.6",
+                "7.8",
+                "8.0",
+                "8.2",
+                "8.4",
+                "8.6",
+                "8.8",
+                "9.0",
+                "9.2",
+                "9.4",
+                "9.6",
+                "9.8",
+                "10.0",
+                "10.2",
+                "10.4",
+                "10.6",
+                "10.8",
+                "11.0",
+                "11.2",
+                "11.4",
+                "11.6",
+                "11.8",
+                "12.0",
+                "12.2",
+                "12.4",
+                "12.6",
+                "12.8",
+                "13.0",
+                "13.2",
+                "13.4",
+                "13.6",
+                "13.8",
+                "14.0",
+                "14.2",
+                "14.4",
+                "14.6",
+                "14.8",
+                "15.0",
+                "15.2",
+                "15.4",
+                "15.6",
+                "15.8",
+                "16.0",
+                "16.2",
+                "16.4",
+                "16.6",
+                "16.8",
+                "17.0",
+                "17.2",
+                "17.4",
+                "17.6",
+                "17.8",
+                "18.0",
+                "18.2",
+                "18.4",
+                "18.6",
+                "18.8",
+                "19.0",
+                "19.2",
+                "19.4",
+                "19.6",
+                "19.8",
+                "20.0",
+                "20.2",
+                "20.4",
+                "20.6",
+                "20.8",
+                "21.0",
+                "21.2",
+                "21.4",
+                "21.6",
+                "21.8",
+                "22.0",
+                "22.2",
+                "22.4",
+                "22.6",
+                "22.8",
+                "23.0",
+                "23.2",
+                "23.4",
+                "23.6",
+                "23.8",
+                "24.0",
+                "24.2",
+                "24.4",
+                "24.6",
+                "24.8",
+                "25.0",
+                "25.2",
+                "25.4",
+                "25.6",
+                "25.8",
+                "26.0",
+                "26.2",
+                "26.4",
+                "26.6",
+                "26.8",
+                "27.0",
+                "27.2",
+                "27.4",
+                "27.6",
+                "27.8",
+                "28.0",
+                "28.2",
+                "28.4",
+                "28.6",
+                "28.8",
+                "29.0",
+                "29.2",
+                "29.4",
+                "29.6",
+                "29.8",
+                "30.0",
+                "30.2",
+                "30.4",
+                "30.6",
+                "30.8",
+                "31.0",
+                "31.2",
+                "31.4",
+                "31.6",
+                "31.8",
+                "32.0",
+                "32.2",
+                "32.4",
+                "32.6",
+                "32.8",
+                "33.0",
+                "33.2",
+                "33.4",
+                "33.6",
+                "33.8",
+                "34.0",
+                "34.2",
+                "34.4",
+                "34.6",
+                "34.8",
+                "35.0",
+                "35.2",
+                "35.4",
+                "35.6",
+                "35.8",
+                "36.0",
+                "36.2",
+                "36.4",
+                "36.6",
+                "36.8",
+                "37.0",
+                "37.2",
+                "37.4",
+                "37.6",
+                "37.8",
+                "38.0",
+                "38.2",
+                "38.4",
+                "38.6",
+                "38.8",
+                "39.0",
+                "39.2",
+                "39.4",
+                "39.6",
+                "39.8",
+                "40.0"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "name": "power (W)",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0
+        },
+        {
+            "name": "efficiency (%)",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTruncate": {},
+            "nameMoveOverlap": true,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "min": 0,
+            "max": 100,
+            "minInterval": 0,
+            "silent": false,
+            "triggerEvent": false,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": false
+                }
+            },
+            "animation": true,
+            "animationThreshold": 2000,
+            "animationDuration": 1000,
+            "animationEasing": "cubicOut",
+            "animationDelay": 0,
+            "animationDurationUpdate": 300,
+            "animationEasingUpdate": "cubicOut",
+            "animationDelayUpdate": 0
+        }
+    ],
+    "title": [
+        {
+            "show": true,
+            "text": "Load power and efficiency against load resistance",
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ]
+};
+                chart_d75cf5ac3b6b40a99896ef5f82adb910.setOption(option_d75cf5ac3b6b40a99896ef5f82adb910);
+        });
+    </script>
+</div>
+</div>
+<p>The power peaks at 14.5 W when <span class="math inline">\(R_L = 4.4\ \Omega\)</span>, at exactly 50 % efficiency. Past the peak, load power falls but efficiency keeps climbing towards 100 %.</p>
+<p>That one chart explains why two fields treat this theorem so differently:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Goal</th>
+<th>Design choice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Radio, antennas, audio, sensors</td>
+<td>Get the most <strong>signal</strong> out of a weak source</td>
+<td>Match the load to the source (<span class="math inline">\(R_L = R_{th}\)</span>; 50 <span class="math inline">\(\Omega\)</span> RF systems)</td>
+</tr>
+<tr class="even">
+<td>Power systems, batteries, chargers</td>
+<td>Waste as little <strong>energy</strong> as possible</td>
+<td>Keep <span class="math inline">\(R_L \gg R_{th}\)</span>; the grid’s source impedance is tiny next to any load</td>
+</tr>
+</tbody>
+</table>
+<p>A power station run at maximum power transfer would burn half its output in its own windings and lines.</p>
+<hr>
+</section>
+<section id="when-the-shortcuts-fail" class="level2">
+<h2 class="anchored" data-anchor-id="when-the-shortcuts-fail">When the shortcuts fail</h2>
+<ul>
+<li><strong>Nonlinear parts.</strong> A diode or a solar cell has a curved characteristic, so no single Thevenin pair describes it. Engineers linearise around an operating point instead. The resulting <strong>small-signal</strong> equivalent is valid only for small changes about that point.</li>
+<li><strong>Power.</strong> As the superposition section showed, partial powers never add. Superpose voltages or currents, then compute power.</li>
+<li><strong>Dependent sources.</strong> A source controlled by another voltage or current cannot be switched off. Find <span class="math inline">\(R_{th}\)</span> from <span class="math inline">\(V_{oc}/I_{sc}\)</span>, or drive the terminals with a test source and measure the ratio.</li>
+<li><strong>AC circuits.</strong> All of these theorems carry over to sinusoidal steady state if you replace resistances with complex impedances at one frequency. <span class="math inline">\(Z_{th}\)</span> is then complex, and maximum power transfer becomes a <strong>conjugate match</strong>, <span class="math inline">\(Z_L = Z_{th}^*\)</span>, which also cancels the reactance. <a href="./three_phase_power_systems.html">Three-Phase Power Systems</a> uses the same phasor tools.</li>
+</ul>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Theorem</th>
+<th>What it gives you</th>
+<th>Reach for it when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nodal analysis</td>
+<td>Every node voltage, by solving <span class="math inline">\(Gv = i\)</span></td>
+<td>You need the whole circuit, or a computer will do the work</td>
+</tr>
+<tr class="even">
+<td>Superposition</td>
+<td>Each source’s share of a voltage or current</td>
+<td>Sources of different kinds or frequencies act at once</td>
+</tr>
+<tr class="odd">
+<td>Source transformation</td>
+<td>Swap series <span class="math inline">\(V\)</span>-<span class="math inline">\(R\)</span> for parallel <span class="math inline">\(I\)</span>-<span class="math inline">\(R\)</span></td>
+<td>Collapsing a ladder circuit by hand</td>
+</tr>
+<tr class="even">
+<td>Thevenin</td>
+<td><span class="math inline">\(V_{th}\)</span> in series with <span class="math inline">\(R_{th}\)</span></td>
+<td>The load varies, or sits in series</td>
+</tr>
+<tr class="odd">
+<td>Norton</td>
+<td><span class="math inline">\(I_N\)</span> in parallel with <span class="math inline">\(R_N\)</span></td>
+<td>Loads in parallel, or current-source models such as transistors</td>
+</tr>
+<tr class="even">
+<td>Maximum power transfer</td>
+<td><span class="math inline">\(R_L = R_{th}\)</span> for most power, at 50 % efficiency</td>
+<td>Signal and RF work, never power delivery</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bthek1\.github\.io\/Electrical_Docs");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<script src="https://utteranc.es/client.js" repo="quarto-dev/quarto-web" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./electricity_equations.html" class="pagination-link" aria-label="Electricity Equations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Electricity Equations</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./three_phase_power_systems.html" class="pagination-link" aria-label="Three-Phase Power Systems">
+        <span class="nav-page-text">Three-Phase Power Systems</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">
+<p>Trademark</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/bthek1/Electrical_Docs/issues">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/index.html">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/bthek1/Electrical_Docs/blob/main/04_Network_Theorems.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Electrical_Docs/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bthek1/Electrical_Docs">
+      <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/benedict-thekkel/">
+      <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

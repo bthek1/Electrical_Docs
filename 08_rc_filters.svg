@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 250" width="820" height="250" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="820" height="250" fill="#ffffff"/>
+  <text x="200" y="32" text-anchor="middle" font-size="14" fill="#0f172a" font-weight="bold">RC low-pass</text>
+  <circle cx="50" cy="80" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="50" y="68" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">Vin</text>
+  <circle cx="50" cy="200" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="50,80 112.0,80.0 115.0,87.0 121.0,73.0 127.0,87.0 133.0,73.0 139.0,87.0 145.0,73.0 148.0,80.0 210,80" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="130.0" y="66.0" text-anchor="middle" font-size="13" fill="#0f172a">R</text>
+  <polyline points="210,80 210.0,135.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="210.0,145.0 210,200" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="224.0,135.0 196.0,135.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="224.0,145.0 196.0,145.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="232.0" y="144.0" text-anchor="start" font-size="13" fill="#0f172a">C</text>
+  <circle cx="210" cy="80" r="3.5" fill="#475569"/>
+  <circle cx="210" cy="200" r="3.5" fill="#475569"/>
+  <polyline points="210,80 340,80" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="50,200 340,200" fill="none" stroke="#475569" stroke-width="2"/>
+  <circle cx="340" cy="80" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="340" y="68" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">Vout</text>
+  <circle cx="340" cy="200" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="210,200 210,208" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="198,208 222,208" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="202,212 218,212" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="206,216 214,216" fill="none" stroke="#475569" stroke-width="2"/>
+  <line x1="410" y1="20" x2="410" y2="235" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <text x="610" y="32" text-anchor="middle" font-size="14" fill="#0f172a" font-weight="bold">RC high-pass</text>
+  <circle cx="460" cy="80" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="460" y="68" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">Vin</text>
+  <circle cx="460" cy="200" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="460,80 535.0,80.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="545.0,80.0 620,80" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="535.0,66.0 535.0,94.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="545.0,66.0 545.0,94.0" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="540.0" y="58.0" text-anchor="middle" font-size="13" fill="#0f172a">C</text>
+  <polyline points="620,80 620.0,122.0 613.0,125.0 627.0,131.0 613.0,137.0 627.0,143.0 613.0,149.0 627.0,155.0 620.0,158.0 620,200" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="636.0" y="144.0" text-anchor="start" font-size="13" fill="#0f172a">R</text>
+  <circle cx="620" cy="80" r="3.5" fill="#475569"/>
+  <circle cx="620" cy="200" r="3.5" fill="#475569"/>
+  <polyline points="620,80 750,80" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="460,200 750,200" fill="none" stroke="#475569" stroke-width="2"/>
+  <circle cx="750" cy="80" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <text x="750" y="68" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="bold">Vout</text>
+  <circle cx="750" cy="200" r="4" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+  <polyline points="620,200 620,208" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="608,208 632,208" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="612,212 628,212" fill="none" stroke="#475569" stroke-width="2"/>
+  <polyline points="616,216 624,216" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="200" y="242" text-anchor="middle" font-size="12" fill="#475569">passes below fc = 1/(2&#960;RC)</text>
+  <text x="610" y="242" text-anchor="middle" font-size="12" fill="#475569">passes above fc = 1/(2&#960;RC)</text>
+</svg>

@@ -1,0 +1,7 @@
+# Electrical_Docs
+
+> Electrical theory, signal processing, load forecasting and energy cost
+
+## Pages
+
+- [Electrical Docs](https://bthek1.github.io/Electrical_Docs/index.llms.md)

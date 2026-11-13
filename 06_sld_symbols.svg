@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="900" height="540" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect width="900" height="540" fill="#ffffff"/>
+  <text x="450" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Common single line diagram symbols (IEC 60617 style)</text>
+
+  <g stroke="#334155" stroke-width="2" fill="none">
+    <!-- Row 1 -->
+    <g transform="translate(112,45)">
+      <line x1="-70" y1="55" x2="70" y2="55" stroke-width="7"/>
+      <line x1="-40" y1="55" x2="-40" y2="95"/>
+      <line x1="0" y1="20" x2="0" y2="95"/>
+      <line x1="40" y1="55" x2="40" y2="95"/>
+    </g>
+    <g transform="translate(337,45)">
+      <line x1="0" y1="10" x2="0" y2="40"/>
+      <rect x="-14" y="40" width="28" height="28" fill="#334155"/>
+      <line x1="0" y1="68" x2="0" y2="100"/>
+    </g>
+    <g transform="translate(562,45)">
+      <line x1="0" y1="10" x2="0" y2="40"/>
+      <line x1="-9" y1="40" x2="9" y2="40"/>
+      <line x1="0" y1="72" x2="-20" y2="44"/>
+      <circle cx="0" cy="72" r="3" fill="#334155"/>
+      <line x1="0" y1="72" x2="0" y2="100"/>
+    </g>
+    <g transform="translate(787,45)">
+      <line x1="0" y1="10" x2="0" y2="100"/>
+      <rect x="-9" y="32" width="18" height="44" fill="#ffffff"/>
+      <line x1="0" y1="32" x2="0" y2="76"/>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(112,200)">
+      <line x1="0" y1="10" x2="0" y2="28"/>
+      <circle cx="0" cy="45" r="17"/>
+      <circle cx="0" cy="69" r="17"/>
+      <line x1="0" y1="86" x2="0" y2="100"/>
+    </g>
+    <g transform="translate(337,200)">
+      <line x1="0" y1="10" x2="0" y2="100"/>
+      <circle cx="0" cy="55" r="11"/>
+    </g>
+    <g transform="translate(562,200)">
+      <line x1="0" y1="10" x2="0" y2="26"/>
+      <circle cx="0" cy="39" r="13"/>
+      <circle cx="0" cy="57" r="13"/>
+      <line x1="0" y1="70" x2="0" y2="82"/>
+      <line x1="-14" y1="82" x2="14" y2="82"/>
+      <line x1="-9" y1="88" x2="9" y2="88"/>
+      <line x1="-4" y1="94" x2="4" y2="94"/>
+    </g>
+    <g transform="translate(787,200)">
+      <line x1="0" y1="10" x2="0" y2="62"/>
+      <line x1="-20" y1="62" x2="20" y2="62"/>
+      <line x1="-13" y1="70" x2="13" y2="70"/>
+      <line x1="-6" y1="78" x2="6" y2="78"/>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(112,355)">
+      <line x1="0" y1="10" x2="0" y2="40"/>
+      <line x1="-9" y1="40" x2="9" y2="40"/>
+      <line x1="0" y1="70" x2="-20" y2="44"/>
+      <circle cx="0" cy="70" r="3" fill="#334155"/>
+      <line x1="0" y1="70" x2="0" y2="82"/>
+      <line x1="-14" y1="82" x2="14" y2="82"/>
+      <line x1="-9" y1="88" x2="9" y2="88"/>
+      <line x1="-4" y1="94" x2="4" y2="94"/>
+    </g>
+    <g transform="translate(337,355)">
+      <line x1="0" y1="10" x2="0" y2="32"/>
+      <rect x="-10" y="32" width="20" height="38" fill="#ffffff"/>
+      <line x1="0" y1="38" x2="0" y2="62" marker-end="url(#arr)"/>
+      <line x1="0" y1="70" x2="0" y2="82"/>
+      <line x1="-14" y1="82" x2="14" y2="82"/>
+      <line x1="-9" y1="88" x2="9" y2="88"/>
+      <line x1="-4" y1="94" x2="4" y2="94"/>
+    </g>
+    <g transform="translate(562,355)">
+      <line x1="0" y1="10" x2="0" y2="35"/>
+      <circle cx="0" cy="55" r="20"/>
+      <line x1="0" y1="75" x2="0" y2="100"/>
+    </g>
+    <g transform="translate(787,355)">
+      <line x1="0" y1="10" x2="0" y2="80" marker-end="url(#arr)"/>
+    </g>
+  </g>
+
+  <!-- Glyph text inside symbols -->
+  <text x="562" y="416" text-anchor="middle" font-size="17" font-weight="bold" fill="#334155">G</text>
+
+  <!-- Labels -->
+  <g fill="#0f172a" text-anchor="middle">
+    <text x="112" y="168">Busbar</text>
+    <text x="112" y="184" fill="#475569" font-size="12">common node, drawn thick</text>
+    <text x="337" y="168">Circuit breaker (CB)</text>
+    <text x="337" y="184" fill="#475569" font-size="12">filled = closed, hollow = open</text>
+    <text x="562" y="168">Disconnector (isolator)</text>
+    <text x="562" y="184" fill="#475569" font-size="12">shown open; no load breaking</text>
+    <text x="787" y="168">Fuse</text>
+    <text x="787" y="184" fill="#475569" font-size="12">e.g. HV drop-out fuse</text>
+
+    <text x="112" y="323">Power transformer</text>
+    <text x="112" y="339" fill="#475569" font-size="12">kV ratio, MVA, Z%, vector group</text>
+    <text x="337" y="323">Current transformer (CT)</text>
+    <text x="337" y="339" fill="#475569" font-size="12">feeds protection and metering</text>
+    <text x="562" y="323">Voltage transformer (VT)</text>
+    <text x="562" y="339" fill="#475569" font-size="12">bus or line voltage sensing</text>
+    <text x="787" y="323">Earth</text>
+    <text x="787" y="339" fill="#475569" font-size="12">earthing point</text>
+
+    <text x="112" y="478">Earth switch</text>
+    <text x="112" y="494" fill="#475569" font-size="12">earths a dead section for work</text>
+    <text x="337" y="478">Surge arrester</text>
+    <text x="337" y="494" fill="#475569" font-size="12">diverts lightning surges</text>
+    <text x="562" y="478">Generator</text>
+    <text x="562" y="494" fill="#475569" font-size="12">synchronous machine source</text>
+    <text x="787" y="478">Outgoing feeder or load</text>
+    <text x="787" y="494" fill="#475569" font-size="12">continues off this drawing</text>
+  </g>
+
+  <text x="450" y="526" text-anchor="middle" font-size="12" fill="#475569">ANSI drawings (North America) differ mainly in the breaker symbol and show protection as device numbers such as 50/51 or 87T.</text>
+</svg>

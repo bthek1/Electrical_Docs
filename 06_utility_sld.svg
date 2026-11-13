@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 930" width="1000" height="930" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a110" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b91c1c"/></marker>
+    <marker id="a11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker>
+    <marker id="alv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker>
+  </defs>
+  <rect width="1000" height="930" fill="#ffffff"/>
+  <text x="440" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a">Example utility single line diagram: transmission to customer</text>
+
+  <!-- Boundaries -->
+  <g fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4">
+    <rect x="60" y="40" width="760" height="440" rx="6"/>
+    <rect x="200" y="590" width="400" height="300" rx="6"/>
+  </g>
+  <text x="72" y="60" font-size="13" font-weight="bold" fill="#475569">Zone substation</text>
+  <text x="212" y="610" font-size="13" font-weight="bold" fill="#475569">Distribution substation (pad-mount or pole)</text>
+
+  <!-- 110 kV: two incoming lines -->
+  <g stroke="#b91c1c" stroke-width="2" fill="none">
+    <line x1="260" y1="45" x2="260" y2="100"/>
+    <line x1="560" y1="45" x2="560" y2="100"/>
+    <!-- disconnectors -->
+    <line x1="251" y1="100" x2="269" y2="100"/><line x1="260" y1="130" x2="244" y2="104"/>
+    <line x1="551" y1="100" x2="569" y2="100"/><line x1="560" y1="130" x2="544" y2="104"/>
+    <line x1="260" y1="130" x2="260" y2="140"/><line x1="560" y1="130" x2="560" y2="140"/>
+    <!-- CBs -->
+    <rect x="248" y="140" width="24" height="24" fill="#b91c1c"/>
+    <rect x="548" y="140" width="24" height="24" fill="#b91c1c"/>
+    <line x1="260" y1="164" x2="260" y2="199"/><line x1="560" y1="164" x2="560" y2="199"/>
+    <circle cx="260" cy="182" r="8"/><circle cx="560" cy="182" r="8"/>
+    <circle cx="260" cy="215" r="16"/><circle cx="560" cy="215" r="16"/>
+  </g>
+  <g fill="#b91c1c"><circle cx="260" cy="130" r="3"/><circle cx="560" cy="130" r="3"/></g>
+  <g stroke="#1d4ed8" stroke-width="2" fill="none">
+    <circle cx="260" cy="237" r="16"/><circle cx="560" cy="237" r="16"/>
+    <line x1="260" y1="253" x2="260" y2="275"/><line x1="560" y1="253" x2="560" y2="275"/>
+    <rect x="248" y="275" width="24" height="24" fill="#1d4ed8"/>
+    <rect x="548" y="275" width="24" height="24" fill="#1d4ed8"/>
+    <line x1="260" y1="299" x2="260" y2="330"/><line x1="560" y1="299" x2="560" y2="330"/>
+  </g>
+  <g font-size="12" fill="#0f172a">
+    <text x="270" y="60">110 kV line 1</text>
+    <text x="570" y="60">110 kV line 2</text>
+    <text x="284" y="156">CB, 21 distance</text>
+    <text x="584" y="156">CB, 21 distance</text>
+    <text x="290" y="216" font-weight="bold">T1  110/11 kV</text>
+    <text x="290" y="232">25 MVA, Z = 10%</text>
+    <text x="590" y="216" font-weight="bold">T2  110/11 kV</text>
+    <text x="590" y="232">25 MVA, Z = 10%</text>
+    <text x="290" y="248" fill="#475569">87T differential</text>
+    <text x="590" y="248" fill="#475569">87T differential</text>
+  </g>
+
+  <!-- 11 kV buses -->
+  <g stroke="#1d4ed8" fill="none">
+    <line x1="140" y1="330" x2="395" y2="330" stroke-width="7"/>
+    <line x1="425" y1="330" x2="700" y2="330" stroke-width="7"/>
+    <line x1="395" y1="330" x2="398" y2="330" stroke-width="2"/>
+    <rect x="398" y="318" width="24" height="24" fill="#ffffff" stroke-width="2"/>
+    <line x1="422" y1="330" x2="425" y2="330" stroke-width="2"/>
+  </g>
+  <g font-size="12" fill="#0f172a">
+    <text x="142" y="318">11 kV bus A</text>
+    <text x="698" y="318" text-anchor="end">11 kV bus B</text>
+    <text x="410" y="306" text-anchor="middle" font-weight="bold">N/O</text>
+    <text x="410" y="360" text-anchor="middle" fill="#475569">bus section</text>
+    <text x="712" y="326" fill="#7c2d12">fault level</text>
+    <text x="712" y="342" fill="#7c2d12">11.7 kA (N/O)</text>
+    <text x="712" y="358" fill="#7c2d12">21.0 kA if closed</text>
+  </g>
+
+  <!-- 11 kV feeders -->
+  <g stroke="#1d4ed8" stroke-width="2" fill="none">
+    <line x1="180" y1="330" x2="180" y2="380"/><rect x="168" y="380" width="24" height="24" fill="#1d4ed8"/><line x1="180" y1="404" x2="180" y2="455" marker-end="url(#a11)"/>
+    <line x1="330" y1="330" x2="330" y2="380"/><rect x="318" y="380" width="24" height="24" fill="#1d4ed8"/><line x1="330" y1="404" x2="330" y2="620"/>
+    <line x1="490" y1="330" x2="490" y2="380"/><rect x="478" y="380" width="24" height="24" fill="#1d4ed8"/><line x1="490" y1="404" x2="490" y2="550"/>
+    <line x1="640" y1="330" x2="640" y2="380"/><rect x="628" y="380" width="24" height="24" fill="#1d4ed8"/><line x1="640" y1="404" x2="640" y2="455" marker-end="url(#a11)"/>
+    <!-- feeder tie with normally open point -->
+    <line x1="490" y1="550" x2="425" y2="550"/>
+    <line x1="425" y1="541" x2="425" y2="559"/>
+    <line x1="395" y1="550" x2="421" y2="534"/>
+    <line x1="395" y1="550" x2="330" y2="550"/>
+  </g>
+  <g fill="#1d4ed8"><circle cx="395" cy="550" r="3"/><circle cx="330" cy="550" r="4"/></g>
+  <g font-size="12" fill="#0f172a">
+    <text x="200" y="397">F1</text>
+    <text x="350" y="397">F2</text>
+    <text x="510" y="397">F3</text>
+    <text x="660" y="397">F4</text>
+    <text x="200" y="413" fill="#475569">50/51</text>
+    <text x="350" y="413" fill="#475569">50/51</text>
+    <text x="510" y="413" fill="#475569">50/51</text>
+    <text x="660" y="413" fill="#475569">50/51</text>
+    <text x="320" y="500" text-anchor="end">11 kV feeder F2</text>
+    <text x="320" y="516" text-anchor="end">several km</text>
+    <text x="410" y="575" text-anchor="middle" font-weight="bold">N/O point</text>
+    <text x="500" y="500">F3 can backfeed F2</text>
+    <text x="500" y="516">by closing the N/O point</text>
+  </g>
+
+  <!-- Distribution transformer -->
+  <g stroke="#1d4ed8" stroke-width="2" fill="none">
+    <rect x="321" y="620" width="18" height="36" fill="#ffffff"/>
+    <line x1="330" y1="620" x2="330" y2="656"/>
+    <line x1="330" y1="656" x2="330" y2="676"/>
+    <circle cx="330" cy="692" r="16"/>
+  </g>
+  <g stroke="#15803d" stroke-width="2" fill="none">
+    <circle cx="330" cy="714" r="16"/>
+    <line x1="330" y1="730" x2="330" y2="745"/>
+    <rect x="318" y="745" width="24" height="24" fill="#15803d"/>
+    <line x1="330" y1="769" x2="330" y2="800"/>
+    <line x1="230" y1="800" x2="470" y2="800" stroke-width="7"/>
+    <line x1="270" y1="800" x2="270" y2="815"/><rect x="263" y="815" width="14" height="28" fill="#ffffff"/><line x1="270" y1="815" x2="270" y2="843"/><line x1="270" y1="843" x2="270" y2="878" marker-end="url(#alv)"/>
+    <line x1="350" y1="800" x2="350" y2="815"/><rect x="343" y="815" width="14" height="28" fill="#ffffff"/><line x1="350" y1="815" x2="350" y2="843"/><line x1="350" y1="843" x2="350" y2="878" marker-end="url(#alv)"/>
+    <line x1="430" y1="800" x2="430" y2="815"/><rect x="423" y="815" width="14" height="28" fill="#ffffff"/><line x1="430" y1="815" x2="430" y2="843"/><line x1="430" y1="843" x2="430" y2="878" marker-end="url(#alv)"/>
+  </g>
+  <g font-size="12" fill="#0f172a">
+    <text x="350" y="642">HV fuse</text>
+    <text x="360" y="700" font-weight="bold">11 kV / 433 V</text>
+    <text x="360" y="716">500 kVA, Z = 4%, Dyn11</text>
+    <text x="352" y="762">LV main CB</text>
+    <text x="476" y="796" fill="#0f172a">400/230 V bus</text>
+    <text x="476" y="812" fill="#7c2d12">fault level 15.8 kA</text>
+    <text x="350" y="908" text-anchor="middle" fill="#475569">LV circuits to customers (fused)</text>
+  </g>
+
+  <!-- Voltage legend -->
+  <g font-size="12" fill="#0f172a">
+    <text x="850" y="560" font-weight="bold">Voltage level</text>
+    <rect x="850" y="572" width="22" height="6" fill="#b91c1c"/><text x="880" y="580">110 kV</text>
+    <rect x="850" y="592" width="22" height="6" fill="#1d4ed8"/><text x="880" y="600">11 kV</text>
+    <rect x="850" y="612" width="22" height="6" fill="#15803d"/><text x="880" y="620">400/230 V</text>
+    <text x="850" y="650" font-weight="bold">Breakers</text>
+    <rect x="850" y="660" width="14" height="14" fill="#334155"/><text x="872" y="672">closed</text>
+    <rect x="850" y="682" width="14" height="14" fill="#ffffff" stroke="#334155" stroke-width="2"/><text x="872" y="694">open (N/O)</text>
+    <text x="850" y="724" font-weight="bold">Protection</text>
+    <text x="850" y="742">21 distance</text>
+    <text x="850" y="758">87T transformer diff.</text>
+    <text x="850" y="774">50/51 overcurrent</text>
+  </g>
+</svg>
